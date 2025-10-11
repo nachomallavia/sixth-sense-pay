@@ -1,0 +1,34 @@
+---
+import { Globe } from "lucide-react"
+
+
+
+const languages = [
+    { value: "en", label: "English" },
+    { value: "es", label: "Español" },
+]
+
+---
+
+<Globe className="w-4 h-4" />
+<select name="language" id="language">
+    {languages.map((lang) => (
+        <option value={lang.value} >{lang.label}</option>
+    ))}
+</select>
+<script>
+    const language = localStorage.getItem('locale')
+    const languageSelect = document.getElementById('language')
+    if (languageSelect) {
+        (languageSelect as HTMLSelectElement).value = language || 'en'
+    }
+    languageSelect?.addEventListener('change', (event) => {
+        const newLocale = (event.target as HTMLSelectElement).value
+        localStorage.setItem('locale', newLocale)
+        window.location.reload()
+    })
+</script>
+
+
+
+

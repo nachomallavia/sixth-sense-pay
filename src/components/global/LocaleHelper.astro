@@ -1,0 +1,7 @@
+---
+const locale = Astro.session?.get('locale')
+if (locale === undefined) {
+    Astro.session?.set('locale', 'en')
+}
+
+---

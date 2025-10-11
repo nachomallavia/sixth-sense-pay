@@ -1,16 +1,29 @@
 ---
-
+import MainLayout from "@/layouts/mainLayout.astro"
+ import { Button } from "@/components/ui/button"
+const localesContent = {
+	en:{
+		title: "Sixth Sense Pay",
+		description: "Sixth Sense Pay is a payment platform that allows you to pay for your services with your Sixth Sense Pay card.",
+		button: "Click me"
+	},
+	es:{
+		title: "Página de inicio de Sixth Sense Pay",
+		description: "Sixth Sense Pay es una plataforma de pago que te permite pagar tus servicios con tu tarjeta Sixth Sense Pay.",
+		button: "Clickeame"
+	}
+}
+const locale = Astro.currentLocale || "es"
+function getContent(locale: string) {
+	return localesContent[locale as keyof typeof localesContent]
+}
+const content = getContent(locale)
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout>
+	
+
+		<h1 class="text-5xl font-bold">{content.title}</h1>
+		<Button >{content.button}</Button>
+
+</MainLayout>

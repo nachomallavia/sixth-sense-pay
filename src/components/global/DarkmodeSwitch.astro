@@ -1,0 +1,40 @@
+---
+import { Button } from "@/components/ui/button"
+import { Moon, Sun } from "lucide-react"
+---
+<div id="toggle-dark-mode" class="flex items-center justify-center gap-2">
+<Button variant="ghost"  id="dark-mode-button">
+    <Moon className="w-12 h-12" />
+</Button>
+
+<Button variant="ghost"  id="light-mode-button">
+    <Sun className="w-12 h-12" />
+</Button>
+</div>
+
+<script>
+    
+    const toggleDarkMode = document.getElementById("toggle-dark-mode")
+    const currentTheme = document.body.classList.contains("dark") ? "dark" : "light"
+    const darkModeButton = document.getElementById("dark-mode-button")
+    const lightModeButton = document.getElementById("light-mode-button")
+    if (currentTheme === "dark" && darkModeButton && lightModeButton) {
+        darkModeButton.style.display = "none"
+        lightModeButton.style.display = "block"
+    } else if (currentTheme === "light" && darkModeButton && lightModeButton) {
+        darkModeButton.style.display = "block"
+        lightModeButton.style.display = "none"
+    }
+    toggleDarkMode?.addEventListener("click", () => {
+        document.body.classList.toggle("dark")
+        const currentTheme = document.body.classList.contains("dark") ? "dark" : "light"
+        if (currentTheme === "dark" && darkModeButton && lightModeButton) {
+            darkModeButton.style.display = "none"
+            lightModeButton.style.display = "block"
+        } else if (currentTheme === "light" && darkModeButton && lightModeButton) {
+            darkModeButton.style.display = "block"
+            lightModeButton.style.display = "none"
+        }
+    })
+    
+</script>
