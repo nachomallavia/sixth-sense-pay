@@ -1,10 +1,24 @@
 ---
 import '../styles/global.css'
 import Header from "@/components/global/Header.astro"
-import LocaleHelper from "@/components/global/LocaleHelper.astro"
+import { actions } from 'astro:actions';
+interface Input {
+    locale: string
+    path: string
+}
+interface Output {
+    i18n: object,
+	error?: string
+}
+
+const locale = await Astro.session?.get('locale')
+let currentLocale = locale || "en"
+const {data,error} = await Astro.callAction(actions.getLocaleContent,{locale: currentLocale})
+const i18n = data?.i18n
+
 ---
 
-<html lang="en">
+<html lang={currentLocale}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,8 +27,8 @@ import LocaleHelper from "@/components/global/LocaleHelper.astro"
 		<title>Sixth Sense Pay</title>
 	</head>
 	<body>
-		<LocaleHelper />
-		<Header />
+
+		<Header {i18n} />
 		<slot />
 	</body>
 	<script>

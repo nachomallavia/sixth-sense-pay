@@ -1,0 +1,28 @@
+{
+    "en": {
+        "home": {
+            "title": "Home"
+        },
+        "navigation": {
+            "home": "Home",
+            "about": "About",
+            "howItWorks": "How It Works",
+            "platforms": "Platforms",
+            "users": "Users",
+            "contact": "Contact"
+        }
+    },
+    "es": {
+        "home": {
+            "title": "Inicio"
+        },
+        "navigation": {
+            "home": "Inicio",
+            "about": "Acerca de",
+            "howItWorks": "Cómo funciona",
+            "platforms": "Plataformas",
+            "users": "Usuarios",
+            "contact": "Contacto"
+        }
+    }
+}

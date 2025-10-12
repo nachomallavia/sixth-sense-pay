@@ -3,6 +3,10 @@ import { Button } from "@/components/ui/button"
 import LanguageSwitch from "@/components/global/LanguageSwitch.astro"
 import Logo from "@/assets/web-isotipo-main-1color-fondo-claro.png"
 import DarkmodeSwitch from "@/components/global/DarkmodeSwitch.astro"
+interface Input {
+    i18n: object
+}
+const {i18n} = Astro.props
 ---
 
 <header class="flex justify-center items-center p-4 bg-primary ">
@@ -12,12 +16,12 @@ import DarkmodeSwitch from "@/components/global/DarkmodeSwitch.astro"
         <nav>
             <ul class="flex gap-8 items-center">
                 
-                <li><a href="/about">About us</a></li>
-                <li><a href="/how-it-works">How it works</a></li>
-                <li><a href="/platforms">Platforms</a></li>
-                <li><a href="/users">Users</a></li>
+                <li><a href="/about">{i18n.navigation.about}</a></li>
+                <li><a href="/how-it-works">{i18n.navigation.howItWorks}</a></li>
+                <li><a href="/platforms">{i18n.navigation.platforms}</a></li>
+                <li><a href="/users">{i18n.navigation.users}</a></li>
 
-                <li><Button className="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">Contact</Button></li>
+                <li><a href="/contact"><Button className="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">{i18n.navigation.contact}</Button></li></a>
             </ul>
         </nav>
         <div id="config" class="flex items-center gap-2 font-bold">

@@ -16,15 +16,24 @@ const languages = [
         <option value={lang.value} >{lang.label}</option>
     ))}
 </select>
+
 <script>
+    import { actions } from 'astro:actions'
     const language = localStorage.getItem('locale')
     const languageSelect = document.getElementById('language')
     if (languageSelect) {
         (languageSelect as HTMLSelectElement).value = language || 'en'
     }
-    languageSelect?.addEventListener('change', (event) => {
+    languageSelect?.addEventListener('change', async(event) => {
         const newLocale = (event.target as HTMLSelectElement).value
         localStorage.setItem('locale', newLocale)
+        const { data, error } = await actions.setLocale(newLocale)
+        if (error) {
+            console.error(error)
+        }
+        if (data?.success) {
+            window.location.reload()
+        }
         window.location.reload()
     })
 </script>
