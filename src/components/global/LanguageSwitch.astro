@@ -1,40 +1,63 @@
 ---
 import { Globe } from "lucide-react"
 
+interface Props {
+    currentLocale: string
+}
 
+const { currentLocale } = Astro.props
 
 const languages = [
-    { value: "en", label: "English" },
-    { value: "es", label: "Español" },
+    { value: "en", label: "Eng" },
+    { value: "es", label: "Esp" },
 ]
-
 ---
 
 <Globe className="w-4 h-4" />
-<select name="language" id="language">
+<select name="language" id="language" class="w-15">
     {languages.map((lang) => (
-        <option value={lang.value} >{lang.label}</option>
+        <option value={lang.value} selected={lang.value === currentLocale}>
+            {lang.label}
+        </option>
     ))}
 </select>
 
 <script>
     import { actions } from 'astro:actions'
-    const language = localStorage.getItem('locale')
-    const languageSelect = document.getElementById('language')
-    if (languageSelect) {
-        (languageSelect as HTMLSelectElement).value = language || 'en'
-    }
-    languageSelect?.addEventListener('change', async(event) => {
+    
+    const languageSelect = document.getElementById('language') as HTMLSelectElement
+    
+    // Single event listener for language change
+    languageSelect?.addEventListener('change', async (event) => {
         const newLocale = (event.target as HTMLSelectElement).value
-        localStorage.setItem('locale', newLocale)
-        const { data, error } = await actions.setLocale(newLocale)
-        if (error) {
-            console.error(error)
+        const currentPath = window.location.pathname
+        
+        // Calculate new URL based on locale
+        let newPath: string
+        if (newLocale === 'en') {
+            // Remove /es/ prefix if present
+            newPath = currentPath.replace(/^\/es(\/|$)/, '/')
+        } else if (newLocale === 'es') {
+            // Add /es/ prefix if not present
+            newPath = currentPath.startsWith('/es') 
+                ? currentPath 
+                : `/es${currentPath === '/' ? '' : currentPath}`
+        } else {
+            newPath = currentPath
         }
-        if (data?.success) {
-            window.location.reload()
+        
+        // Update session storage
+        try {
+            const { data, error } = await actions.setLocale(newLocale)
+            if (error) {
+                console.error('Error setting locale:', error)
+            }
+        } catch (error) {
+            console.error('Error in setLocale action:', error)
         }
-        window.location.reload()
+        
+        // Navigate to new URL (single navigation)
+        window.location.href = newPath
     })
 </script>
 

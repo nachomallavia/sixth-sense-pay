@@ -1,0 +1,31 @@
+---
+import MainLayout from "@/layouts/mainLayout.astro"
+import { actions } from 'astro:actions'
+
+// Get locale from URL parameter
+const { locale } = Astro.params
+
+// Validate locale
+const validLocales = ["en", "es"]
+if (!locale || !validLocales.includes(locale)) {
+    return Astro.redirect('/404')
+}
+
+// Load content for the locale
+const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale })
+const i18n = data?.i18n
+
+if (error) {
+    console.error('Error loading content:', error)
+}
+
+const pageContent = i18n?.howItWorks
+---
+
+<MainLayout locale={locale} i18n={i18n}>
+    <section class="container mx-auto px-4 py-16 max-w-[1440px]">
+        <h1 class="text-4xl font-bold mb-6">{pageContent?.heading}</h1>
+        <p class="text-lg">{pageContent?.description}</p>
+    </section>
+</MainLayout>
+

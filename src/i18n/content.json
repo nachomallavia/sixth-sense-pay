@@ -1,28 +1,134 @@
 {
     "en": {
+        "seo": {
+            "title": "Sixth Sense Pay - Smart Payment Solutions",
+            "description": "Revolutionizing payments with sixth sense technology"
+        },
         "home": {
-            "title": "Home"
+            "title": "Home",
+            "url": "/"
         },
         "navigation": {
-            "home": "Home",
-            "about": "About",
-            "howItWorks": "How It Works",
-            "platforms": "Platforms",
-            "users": "Users",
-            "contact": "Contact"
+            "home": {
+                "title": "Home",
+                "url": "/"
+            },
+            "about": {
+                "title": "About Us",
+                "url": "/about-us"
+            },
+            "howItWorks": {
+                "title": "How It Works",
+                "url": "/how-it-works"
+            },
+            "platforms": {
+                "title": "Platforms",
+                "url": "/platforms"
+            },
+            "users": {
+                "title": "Users",
+                "url": "/users"
+            },
+            "contact": {
+                "title": "Contact",
+                "url": "/contact"
+            }
+        },
+        "about": {
+            "title": "About Us",
+            "url": "/about-us",
+            "heading": "About Sixth Sense Pay",
+            "description": "We are revolutionizing the payment industry with innovative solutions."
+        },
+        "howItWorks": {
+            "title": "How It Works",
+            "url": "/how-it-works",
+            "heading": "How It Works",
+            "description": "Discover how our payment system works seamlessly."
+        },
+        "platforms": {
+            "title": "Platforms",
+            "url": "/platforms",
+            "heading": "Our Platforms",
+            "description": "Integrated with all major platforms and services."
+        },
+        "users": {
+            "title": "Users",
+            "url": "/users",
+            "heading": "For Users",
+            "description": "Simple, secure, and fast payments for everyone."
+        },
+        "contact": {
+            "title": "Contact",
+            "url": "/contact",
+            "heading": "Contact Us",
+            "description": "Get in touch with our team."
         }
     },
     "es": {
+        "seo": {
+            "title": "Sixth Sense Pay - Soluciones de Pago Inteligentes",
+            "description": "Revolucionando los pagos con tecnología de sexto sentido"
+        },
         "home": {
-            "title": "Inicio"
+            "title": "Inicio",
+            "url": "/es/"
         },
         "navigation": {
-            "home": "Inicio",
-            "about": "Acerca de",
-            "howItWorks": "Cómo funciona",
-            "platforms": "Plataformas",
-            "users": "Usuarios",
-            "contact": "Contacto"
+            "home": {
+                "title": "Inicio",
+                "url": "/es/"
+            },
+            "about": {
+                "title": "Nosotros",
+                "url": "/es/about-us"
+            },
+            "howItWorks": {
+                "title": "Cómo funciona",
+                "url": "/es/how-it-works"
+            },
+            "platforms": {
+                "title": "Plataformas",
+                "url": "/es/platforms"
+            },
+            "users": {
+                "title": "Usuarios",
+                "url": "/es/users"
+            },
+            "contact": {
+                "title": "Contacto",
+                "url": "/es/contact"
+            }
+        },
+        "about": {
+            "title": "Nosotros",
+            "url": "/es/about-us",
+            "heading": "Acerca de Sixth Sense Pay",
+            "description": "Estamos revolucionando la industria de pagos con soluciones innovadoras."
+        },
+        "howItWorks": {
+            "title": "Cómo funciona",
+            "url": "/es/how-it-works",
+            "heading": "Cómo funciona",
+            "description": "Descubre cómo funciona nuestro sistema de pagos sin problemas."
+        },
+        "platforms": {
+            "title": "Plataformas",
+            "url": "/es/platforms",
+            "heading": "Nuestras Plataformas",
+            "description": "Integrado con todas las plataformas y servicios principales."
+        },
+        "users": {
+            "title": "Usuarios",
+            "url": "/es/users",
+            "heading": "Para Usuarios",
+            "description": "Pagos simples, seguros y rápidos para todos."
+        },
+        "contact": {
+            "title": "Contacto",
+            "url": "/es/contact",
+            "heading": "Contáctanos",
+            "description": "Ponte en contacto con nuestro equipo."
         }
     }
 }

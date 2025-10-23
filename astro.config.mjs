@@ -34,7 +34,11 @@ export default defineConfig({
     //   },
     integrations: [react()],
     i18n: {
-        locales: ["es", "en", "fr"],
+        locales: ["en", "es"],
         defaultLocale: "en",
+        routing: {
+            prefixDefaultLocale: false,
+            redirectToDefaultLocale: false
+        }
     },
 });

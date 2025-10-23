@@ -1,6 +1,5 @@
 ---
 import MainLayout from "@/layouts/mainLayout.astro"
-import HomeSection1 from "@/components/home/HomeSection1.astro"
 import { actions } from 'astro:actions'
 
 // Default locale for root path
@@ -11,8 +10,14 @@ const i18n = data?.i18n
 if (error) {
     console.error('Error loading content:', error)
 }
+
+const pageContent = i18n?.users
 ---
 
 <MainLayout locale={locale} i18n={i18n}>
-    <HomeSection1 currentLocale={locale} />
+    <section class="container mx-auto px-4 py-16 max-w-[1440px]">
+        <h1 class="text-4xl font-bold mb-6">{pageContent?.heading}</h1>
+        <p class="text-lg">{pageContent?.description}</p>
+    </section>
 </MainLayout>
+

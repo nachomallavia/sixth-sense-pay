@@ -3,32 +3,33 @@ import { Button } from "@/components/ui/button"
 import LanguageSwitch from "@/components/global/LanguageSwitch.astro"
 import Logo from "@/assets/web-isotipo-main-1color-fondo-claro.png"
 import DarkmodeSwitch from "@/components/global/DarkmodeSwitch.astro"
-interface Input {
-    i18n: object
+
+interface Props {
+    i18n: any
+    currentLocale: string
 }
-const {i18n} = Astro.props
+
+const {i18n, currentLocale} = Astro.props
 ---
 
 <header class="flex justify-center items-center p-4 bg-primary ">
     <div class="flex items-center justify-between gap-8 w-full max-w-[1440px]">
-	<a href="/"><img src={Logo.src} alt="Sixth Sense Pay" class="w-12 h-12" /></a>
+	<a href={i18n.navigation.home.url}><img src={Logo.src} alt="Sixth Sense Pay" class="w-12 h-12" /></a>
     <div class="flex items-center gap-8">
         <nav>
             <ul class="flex gap-8 items-center">
                 
-                <li><a href="/about">{i18n.navigation.about}</a></li>
-                <li><a href="/how-it-works">{i18n.navigation.howItWorks}</a></li>
-                <li><a href="/platforms">{i18n.navigation.platforms}</a></li>
-                <li><a href="/users">{i18n.navigation.users}</a></li>
+                <li><a href={i18n.navigation.about.url}>{i18n.navigation.about.title}</a></li>
+                <li><a href={i18n.navigation.howItWorks.url}>{i18n.navigation.howItWorks.title}</a></li>
+                <li><a href={i18n.navigation.platforms.url}>{i18n.navigation.platforms.title}</a></li>
+                <li><a href={i18n.navigation.users.url}>{i18n.navigation.users.title}</a></li>
 
-                <li><a href="/contact"><Button className="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">{i18n.navigation.contact}</Button></li></a>
+                <li><a href={i18n.navigation.contact.url}><Button className="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">{i18n.navigation.contact.title}</Button></li></a>
             </ul>
         </nav>
         <div id="config" class="flex items-center gap-2 font-bold">
-            <LanguageSwitch />
-
-                <DarkmodeSwitch />
-            
+            <LanguageSwitch currentLocale={currentLocale} />
+            <DarkmodeSwitch />
         </div>
     </div>
     

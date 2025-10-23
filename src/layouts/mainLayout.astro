@@ -1,37 +1,71 @@
 ---
 import '../styles/global.css'
 import Header from "@/components/global/Header.astro"
-import { actions } from 'astro:actions';
-interface Input {
+
+interface Props {
     locale: string
-    path: string
-}
-interface Output {
-    i18n: object,
-	error?: string
+    i18n: any
 }
 
-const locale = await Astro.session?.get('locale')
-let currentLocale = locale || "en"
-const {data,error} = await Astro.callAction(actions.getLocaleContent,{locale: currentLocale})
-const i18n = data?.i18n
+const { locale, i18n } = Astro.props
 
+// Generate alternate URLs for SEO
+const currentPath = Astro.url.pathname
+const baseUrl = "https://sixth-sense-pay.vercel.app"
+
+// Calculate alternate URLs
+const pathWithoutLocale = currentPath.replace(/^\/(es|en)/, '') || '/'
+const alternateUrls = {
+    en: pathWithoutLocale,
+    es: `/es${pathWithoutLocale}`
+}
+
+// Page title and description from i18n or defaults
+const pageTitle = i18n?.seo?.title || "Sixth Sense Pay"
+const pageDescription = i18n?.seo?.description || "Sixth Sense Pay - Payment Solutions"
 ---
 
-<html lang={currentLocale}>
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Sixth Sense Pay</title>
+		
+		<!-- Prevent dark mode flash -->
+		<script>
+			// Run immediately to prevent flash
+			(function() {
+				const savedTheme = localStorage.getItem('theme')
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+				
+				if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+					document.documentElement.classList.add('dark')
+				} else {
+					document.documentElement.classList.remove('dark')
+				}
+			})()
+		</script>
+		
+		<!-- SEO Meta Tags -->
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		
+		<!-- Hreflang Tags for SEO -->
+		<link rel="alternate" hreflang="en" href={`${baseUrl}${alternateUrls.en}`} />
+		<link rel="alternate" hreflang="es" href={`${baseUrl}${alternateUrls.es}`} />
+		<link rel="alternate" hreflang="x-default" href={`${baseUrl}${alternateUrls.en}`} />
+		<link rel="canonical" href={`${baseUrl}${currentPath}`} />
+		
+		<!-- Open Graph / Social Media -->
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={`${baseUrl}${currentPath}`} />
 	</head>
 	<body>
-
-		<Header {i18n} />
+		<Header {i18n} currentLocale={locale} />
 		<slot />
 	</body>
-	<script>
-	
-	</script>
 </html>

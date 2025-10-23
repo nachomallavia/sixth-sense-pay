@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@/layouts/mainLayout.astro"
-import HomeSection1 from "@/components/home/HomeSection1.astro"
+import AboutSection1 from "@/components/about/AboutSection1.astro"
 import { actions } from 'astro:actions'
 
 // Default locale for root path
@@ -14,5 +14,5 @@ if (error) {
 ---
 
 <MainLayout locale={locale} i18n={i18n}>
-    <HomeSection1 currentLocale={locale} />
+    <AboutSection1 currentLocale={locale} />
 </MainLayout>

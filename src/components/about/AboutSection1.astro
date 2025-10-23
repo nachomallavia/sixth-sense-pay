@@ -1,0 +1,21 @@
+---
+const {currentLocale} =    Astro.props
+
+const localesContent = {
+    "en":{
+        title: "About Section 1 Title",
+        description: "<span>About <span class='text-primary font-bold'>Section 1</span> description</span>"
+    },
+    "es":{
+        title: "Sección de about 1",
+        description: "Sarasa previa para la descripción de la sección de about 1<span>Descripción de la sección de about 1</span>"
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+
+<section id="about-section-1">
+    <h2 class="text-4xl font-bold" set:text={content.title}></h2>
+    <p set:html={content.description}></p>
+</section>

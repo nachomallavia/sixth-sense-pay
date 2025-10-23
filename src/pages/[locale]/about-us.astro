@@ -1,0 +1,27 @@
+---
+import MainLayout from "@/layouts/mainLayout.astro"
+import AboutSection1 from "@/components/about/AboutSection1.astro"
+import { actions } from 'astro:actions'
+
+// Get locale from URL parameter
+const { locale } = Astro.params
+
+// Validate locale
+const validLocales = ["en", "es"]
+if (!locale || !validLocales.includes(locale)) {
+    return Astro.redirect('/404')
+}
+
+// Load content for the locale
+const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale })
+const i18n = data?.i18n
+
+if (error) {
+    console.error('Error loading content:', error)
+}
+---
+
+<MainLayout locale={locale} i18n={i18n}>
+    <AboutSection1 currentLocale={locale} />
+</MainLayout>
+

@@ -1,14 +1,14 @@
 ---
-const {locale} = await Astro.session?.get('locale')
-let currentLocale = locale || "es"
+const {currentLocale} =    Astro.props
+
 const localesContent = {
     "en":{
-        title: "Home Section 1",
-        description: "Home Section 1 description"
+        title: "Home Section 1 Title",
+        description: "<span>Home <span class='text-primary font-bold'>Section 1</span> description</span>"
     },
     "es":{
         title: "Sección de inicio 1",
-        description: "Descripción de la sección de inicio 1"
+        description: "Sarasa previa para la descripción de la sección de inicio 1<span>Descripción de la sección de inicio 1</span>"
     }
 }
 
@@ -16,7 +16,6 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
 <section id="home-section-1">
-    <h1>{content.title}</h1>
-    <p>{content.description}</p>
+    <h1 class="text-4xl font-bold" set:text={content.title}></h1>
+    <p set:html={content.description}></p>
 </section>
----
