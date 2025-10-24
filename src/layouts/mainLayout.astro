@@ -33,20 +33,29 @@ const pageDescription = i18n?.seo?.description || "Sixth Sense Pay - Payment Sol
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<!-- Prevent dark mode flash -->
-		<script>
-			// Run immediately to prevent flash
-			(function() {
-				const savedTheme = localStorage.getItem('theme')
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-				
-				if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-					document.documentElement.classList.add('dark')
-				} else {
-					document.documentElement.classList.remove('dark')
-				}
-			})()
-		</script>
+	<!-- Prevent dark mode flash -->
+	<script>
+		// Run immediately to prevent flash
+		(function() {
+			// Original dark mode initialization (preserved for future use)
+			// const savedTheme = localStorage.getItem('theme')
+			// const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+			// 
+			// if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+			// 	document.documentElement.classList.add('dark')
+			// } else {
+			// 	document.documentElement.classList.remove('dark')
+			// }
+			
+			// Override: Always force light mode for illustration compatibility
+			const overrideTheme = () => {
+				document.documentElement.classList.remove('dark')
+				localStorage.setItem('theme', 'light')
+			}
+			
+			overrideTheme()
+		})()
+	</script>
 		
 		<!-- SEO Meta Tags -->
 		<title>{pageTitle}</title>

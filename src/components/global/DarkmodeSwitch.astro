@@ -20,7 +20,7 @@ const toggleId = `${idPrefix}toggle-dark-mode`
 </div>
 
 <script>
-    // Initialize theme from localStorage or default to light
+    // Initialize theme from localStorage or default to light (preserved for future use)
     const initializeTheme = () => {
         const savedTheme = localStorage.getItem('theme')
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -32,8 +32,14 @@ const toggleId = `${idPrefix}toggle-dark-mode`
         }
     }
     
+    // Override: Always force light mode for illustration compatibility
+    const overrideTheme = () => {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+    }
+    
     // Run immediately to prevent flash
-    initializeTheme()
+    overrideTheme()
     
     // Add click handler to all dark mode toggles
     const toggleDarkModes = document.querySelectorAll(".dark-mode-toggle")
