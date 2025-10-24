@@ -1,18 +1,4 @@
 ---
-import MainLayout from "@/layouts/mainLayout.astro"
-import HomeSection1 from "@/components/home/HomeSection1.astro"
-import { actions } from 'astro:actions'
-
-// Default locale for root path
-const locale = "en"
-const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale })
-const i18n = data?.i18n
-
-if (error) {
-    console.error('Error loading content:', error)
-}
+// Redirect to localized version
+return Astro.redirect('/en/')
 ---
-
-<MainLayout locale={locale} i18n={i18n}>
-    <HomeSection1 currentLocale={locale} />
-</MainLayout>

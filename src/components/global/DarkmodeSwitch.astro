@@ -1,14 +1,21 @@
 ---
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun } from "@lucide/astro"
+
+interface Props {
+    idPrefix?: string
+}
+
+const { idPrefix = '' } = Astro.props
+const toggleId = `${idPrefix}toggle-dark-mode`
 ---
 
-<div id="toggle-dark-mode" class="flex items-center justify-center gap-2">
-    <button id="dark-mode-button" class="dark:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
-        <Moon className="w-5 h-5" />
+<div id={toggleId} class="flex items-center justify-center gap-2 dark-mode-toggle">
+    <button class="dark:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
+        <Moon class="w-5 h-5" />
     </button>
 
-    <button id="light-mode-button" class="hidden dark:block p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
-        <Sun className="w-5 h-5" />
+    <button class="hidden dark:block p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
+        <Sun class="w-5 h-5" />
     </button>
 </div>
 
@@ -28,17 +35,19 @@ import { Moon, Sun } from "lucide-react"
     // Run immediately to prevent flash
     initializeTheme()
     
-    // Add click handler
-    const toggleDarkMode = document.getElementById("toggle-dark-mode")
-    toggleDarkMode?.addEventListener("click", () => {
-        const isDark = document.documentElement.classList.contains("dark")
-        
-        if (isDark) {
-            document.documentElement.classList.remove("dark")
-            localStorage.setItem('theme', 'light')
-        } else {
-            document.documentElement.classList.add("dark")
-            localStorage.setItem('theme', 'dark')
-        }
+    // Add click handler to all dark mode toggles
+    const toggleDarkModes = document.querySelectorAll(".dark-mode-toggle")
+    toggleDarkModes.forEach(toggle => {
+        toggle.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.contains("dark")
+            
+            if (isDark) {
+                document.documentElement.classList.remove("dark")
+                localStorage.setItem('theme', 'light')
+            } else {
+                document.documentElement.classList.add("dark")
+                localStorage.setItem('theme', 'dark')
+            }
+        })
     })
 </script>

@@ -8,11 +8,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 console.log("REDIS_URL:", process.env.TEST_VAR);
-import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-    vite: {
+	vite: {
         plugins: [tailwindcss()],
     },
     output: "server",
@@ -32,7 +31,7 @@ export default defineConfig({
     //       maxRetriesPerRequest: 1
     //     } : {}
     //   },
-    integrations: [react()],
+    integrations: [],
     i18n: {
         locales: ["en", "es"],
         defaultLocale: "en",

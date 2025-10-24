@@ -1,21 +1,32 @@
 ---
 const {currentLocale} =    Astro.props
-
+import HomeSection1Image from "@/assets/home-section-1.png"
+import Button from "@/components/starwind/button"
 const localesContent = {
     "en":{
-        title: "Home Section 1 Title",
-        description: "<span>Home <span class='text-primary font-bold'>Section 1</span> description</span>"
+        title: "Crypto Payments.<br>Fully Regulated.",
+        description: "Sixth Sense Pay is a regulated payment infrastructure for digital and gaming platforms in Latin America.",
+        button: "Ask for a demo"
     },
     "es":{
-        title: "Sección de inicio 1",
-        description: "Sarasa previa para la descripción de la sección de inicio 1<span>Descripción de la sección de inicio 1</span>"
+        title: "Pagos con Cripto.<br>Totalmente Regulados.",
+        description: "Sixth Sense Pay es una infraestructura de pagos regulada para plataformas digitales y de juegos en América Latina.",
+        button: "Solicitar Demo"
     }
 }
 
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-1">
-    <h1 class="text-4xl font-bold" set:text={content.title}></h1>
-    <p set:html={content.description}></p>
+<section id="home-section-1" class="mx-auto px-4 py-16 w-full h-full">
+    <div class="flex flex-col lg:flex-row gap-2 items-center justify-center w-full max-w-[1440px] mx-auto">
+        <div class="flex flex-col items-start justify-start">
+            <h1 class="text-7xl font-bold" set:html={content.title}></h1>
+            <p set:html={content.description} class="text-2xl font-light mt-4 text-muted-foreground"></p>
+            <Button variant="primary" size="lg" class="text-xl py-6 px-12 mt-8">{content.button}</Button>    
+        </div>
+
+        <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="w-1/2 h-1/2" />
+    </div>
+    </div>
 </section>

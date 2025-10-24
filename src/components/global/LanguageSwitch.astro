@@ -1,63 +1,93 @@
 ---
-import { Globe } from "lucide-react"
+import { Globe, ChevronDown } from "@lucide/astro"
 
 interface Props {
     currentLocale: string
+    idPrefix?: string
 }
 
-const { currentLocale } = Astro.props
+const { currentLocale, idPrefix = '' } = Astro.props
+const selectId = `${idPrefix}language`
 
 const languages = [
     { value: "en", label: "Eng" },
     { value: "es", label: "Esp" },
 ]
 ---
+<div class="flex flex-row items-center justify-center gap-2 language-select-group">
+<Globe class="w-5 h-5" />
+<div class="relative inline-block">
+    <select name="language" id={selectId} class="w-15 h-auto text-lg bg-transparent font-semibold border-none outline-none cursor-pointer language-select pr-2 pl-0">
+        {languages.map((lang) => (
+            <option value={lang.value} selected={lang.value === currentLocale}>
+                {lang.label}
+            </option>
+        ))}
+    </select>
+    <ChevronDown class="w-4 h-4 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
+</div>
+</div>
 
-<Globe className="w-4 h-4" />
-<select name="language" id="language" class="w-15">
-    {languages.map((lang) => (
-        <option value={lang.value} selected={lang.value === currentLocale}>
-            {lang.label}
-        </option>
-    ))}
-</select>
+<style>
+    .language-select {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        background-image: none !important;
+        background-color: transparent !important;
+    }
+    
+    .language-select::-ms-expand {
+        display: none;
+    }
+    
+    .language-select:focus {
+        outline: 2px solid oklch(var(--secondary));
+        outline-offset: 2px;
+    }
+</style>
 
 <script>
     import { actions } from 'astro:actions'
     
-    const languageSelect = document.getElementById('language') as HTMLSelectElement
+    // Use class selector to get all language selects
+    const languageSelects = document.querySelectorAll('.language-select') as NodeListOf<HTMLSelectElement>
     
-    // Single event listener for language change
-    languageSelect?.addEventListener('change', async (event) => {
-        const newLocale = (event.target as HTMLSelectElement).value
-        const currentPath = window.location.pathname
-        
-        // Calculate new URL based on locale
-        let newPath: string
-        if (newLocale === 'en') {
-            // Remove /es/ prefix if present
-            newPath = currentPath.replace(/^\/es(\/|$)/, '/')
-        } else if (newLocale === 'es') {
-            // Add /es/ prefix if not present
-            newPath = currentPath.startsWith('/es') 
-                ? currentPath 
-                : `/es${currentPath === '/' ? '' : currentPath}`
-        } else {
-            newPath = currentPath
-        }
-        
-        // Update session storage
-        try {
-            const { data, error } = await actions.setLocale(newLocale)
-            if (error) {
-                console.error('Error setting locale:', error)
+    // Add event listener to each select
+    languageSelects.forEach(select => {
+        select.addEventListener('change', async (event) => {
+            const newLocale = (event.target as HTMLSelectElement).value
+            const currentPath = window.location.pathname
+            
+            // Calculate new URL based on locale
+            let newPath: string
+            
+            // Remove any existing locale prefix (/en/ or /es/)
+            const pathWithoutLocale = currentPath.replace(/^\/(en|es)(\/|$)/, '/')
+            
+            if (newLocale === 'en') {
+                // Add /en/ prefix
+                newPath = pathWithoutLocale === '/' ? '/en/' : `/en${pathWithoutLocale}`
+            } else if (newLocale === 'es') {
+                // Add /es/ prefix
+                newPath = pathWithoutLocale === '/' ? '/es/' : `/es${pathWithoutLocale}`
+            } else {
+                newPath = currentPath
             }
-        } catch (error) {
-            console.error('Error in setLocale action:', error)
-        }
-        
-        // Navigate to new URL (single navigation)
-        window.location.href = newPath
+            
+            // Update session storage
+            try {
+                const { data, error } = await actions.setLocale(newLocale)
+                if (error) {
+                    console.error('Error setting locale:', error)
+                }
+            } catch (error) {
+                console.error('Error in setLocale action:', error)
+            }
+            
+            // Navigate to new URL (single navigation)
+            window.location.href = newPath
+        })
     })
 </script>
 

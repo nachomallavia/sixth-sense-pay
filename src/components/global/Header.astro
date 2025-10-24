@@ -1,5 +1,6 @@
 ---
-import { Button } from "@/components/ui/button"
+import Button from "@/components/starwind/button"
+import { Menu, X } from "@lucide/astro"
 import LanguageSwitch from "@/components/global/LanguageSwitch.astro"
 import Logo from "@/assets/web-isotipo-main-1color-fondo-claro.png"
 import DarkmodeSwitch from "@/components/global/DarkmodeSwitch.astro"
@@ -12,25 +13,248 @@ interface Props {
 const {i18n, currentLocale} = Astro.props
 ---
 
-<header class="flex justify-center items-center p-4 bg-primary ">
+<header class="flex justify-center items-center p-4 bg-primary">
     <div class="flex items-center justify-between gap-8 w-full max-w-[1440px]">
-	<a href={i18n.navigation.home.url}><img src={Logo.src} alt="Sixth Sense Pay" class="w-12 h-12" /></a>
-    <div class="flex items-center gap-8">
-        <nav>
-            <ul class="flex gap-8 items-center">
-                
-                <li><a href={i18n.navigation.about.url}>{i18n.navigation.about.title}</a></li>
-                <li><a href={i18n.navigation.howItWorks.url}>{i18n.navigation.howItWorks.title}</a></li>
-                <li><a href={i18n.navigation.platforms.url}>{i18n.navigation.platforms.title}</a></li>
-                <li><a href={i18n.navigation.users.url}>{i18n.navigation.users.title}</a></li>
+        <!-- Logo -->
+        <a href={i18n.navigation.home.url}>
+            <img src={Logo.src} alt="Sixth Sense Pay" class="w-12 h-12" />
+        </a>
+        
+        <!-- Desktop Navigation (hidden on mobile) -->
+        <div class="hidden md:flex items-center gap-8">
+            <nav>
+                <ul class="flex gap-8 items-center">
+                    <li><a href={i18n.navigation.about.url}>{i18n.navigation.about.title}</a></li>
+                    <li><a href={i18n.navigation.howItWorks.url}>{i18n.navigation.howItWorks.title}</a></li>
+                    <li><a href={i18n.navigation.platforms.url}>{i18n.navigation.platforms.title}</a></li>
+                    <li><a href={i18n.navigation.users.url}>{i18n.navigation.users.title}</a></li>
+                    <li>
+                        <Button href={i18n.navigation.contact.url} variant="primary" size="md" class="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">
+                            {i18n.navigation.contact.title}
+                        </Button>
+                    </li>
+                </ul>
+            </nav>
+            <div id="desktop-config" class="flex items-center gap-2 font-bold">
+                <LanguageSwitch currentLocale={currentLocale} />
+                <!-- <DarkmodeSwitch /> -->
+            </div>
+        </div>
 
-                <li><a href={i18n.navigation.contact.url}><Button className="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">{i18n.navigation.contact.title}</Button></li></a>
-            </ul>
-        </nav>
-        <div id="config" class="flex items-center gap-2 font-bold">
-            <LanguageSwitch currentLocale={currentLocale} />
-            <DarkmodeSwitch />
+        <!-- Mobile Menu Button (hidden on desktop) -->
+        <button 
+            id="mobile-menu-btn" 
+            class="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <Menu class="w-6 h-6" />
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu Overlay (initially hidden) -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden md:hidden">
+    <!-- Backdrop -->
+    <div id="mobile-menu-backdrop" class="absolute inset-0 bg-primary"></div>
+    
+    <!-- Mobile Menu Container -->
+    <div class="relative h-full flex flex-col">
+        <!-- Header with Logo (always visible) -->
+        <div class="relative z-10 flex items-center justify-between p-4 flex-shrink-0">
+            <a href={i18n.navigation.home.url}>
+                <img src={Logo.src} alt="Sixth Sense Pay" class="w-12 h-12" />
+            </a>
+            <button 
+                id="mobile-menu-close" 
+                class="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                aria-label="Close menu"
+            >
+                <X class="w-6 h-6" />
+            </button>
+        </div>
+        
+        <!-- Menu Content -->
+        <div id="mobile-menu-content" class="relative flex-1 flex items-center justify-center p-6">
+            <!-- Navigation -->
+            <nav class="w-full">
+                <ul class="space-y-4 text-center">
+                    <li>
+                        <a 
+                            href={i18n.navigation.about.url} 
+                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                        >
+                            {i18n.navigation.about.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.howItWorks.url} 
+                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                        >
+                            {i18n.navigation.howItWorks.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.platforms.url} 
+                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                        >
+                            {i18n.navigation.platforms.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.users.url} 
+                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                        >
+                            {i18n.navigation.users.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.contact.url} 
+                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                        >
+                            {i18n.navigation.contact.title}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Config at Bottom (outside animated content) -->
+        <div id="mobile-config" class="relative z-10 flex justify-center items-center gap-4 pb-8 px-6 flex-shrink-0">
+            <LanguageSwitch currentLocale={currentLocale} idPrefix="mobile-" />
+            <!-- <DarkmodeSwitch idPrefix="mobile-" /> -->
         </div>
     </div>
+</div>
+
+<script>
+    import { animate } from 'motion'
+
+    const menuBtn = document.getElementById('mobile-menu-btn')
+    const menu = document.getElementById('mobile-menu')
+    const backdrop = document.getElementById('mobile-menu-backdrop')
+    const content = document.getElementById('mobile-menu-content')
+    const closeBtn = document.getElementById('mobile-menu-close')
+
+    // Performance optimization: cache elements and use will-change
+    let isAnimating = false
+
+    async function openMenu() {
+        if (!menu || !backdrop || !content || isAnimating) return
+        
+        isAnimating = true
+        
+        // Show menu
+        menu.classList.remove('hidden')
+        
+        // Update ARIA
+        menuBtn?.setAttribute('aria-expanded', 'true')
+        
+        // Optimize for animations
+        content.style.willChange = 'transform'
+        backdrop.style.willChange = 'opacity'
+        
+        // Animate backdrop fade in
+        animate(
+            backdrop, 
+            { opacity: [0, 1] },
+            { duration: 0.25 }
+        )
+        
+        // Animate content slide down from top
+        animate(
+            content,
+            { transform: ['translateY(-100%)', 'translateY(0%)'] },
+            { duration: 0.25 }
+        )
+        
+        // Lock body scroll
+        document.body.style.overflow = 'hidden'
+        
+        // Reset will-change after animation
+        setTimeout(() => {
+            content.style.willChange = 'auto'
+            backdrop.style.willChange = 'auto'
+            isAnimating = false
+        }, 250)
+    }
+
+    async function closeMenu() {
+        if (!menu || !backdrop || !content || isAnimating) return
+        
+        isAnimating = true
+        
+        // Optimize for animations
+        content.style.willChange = 'transform'
+        backdrop.style.willChange = 'opacity'
+        
+        // Animate content slide up
+        const contentAnim = animate(
+            content,
+            { transform: ['translateY(0%)', 'translateY(-100%)'] },
+            { duration: 0.25 }
+        )
+        
+        // Animate backdrop fade out
+        const backdropAnim = animate(
+            backdrop,
+            { opacity: [1, 0] },
+            { duration: 0.25 }
+        )
+        
+        // Wait for animations to complete
+        await Promise.all([contentAnim.finished, backdropAnim.finished])
+        
+        // Hide menu
+        menu.classList.add('hidden')
+        
+        // Update ARIA
+        menuBtn?.setAttribute('aria-expanded', 'false')
+        
+        // Restore body scroll
+        document.body.style.overflow = ''
+        
+        // Reset will-change
+        content.style.willChange = 'auto'
+        backdrop.style.willChange = 'auto'
+        isAnimating = false
+    }
+
+    // Event Listeners with performance optimization
+    menuBtn?.addEventListener('click', (e) => {
+        e.preventDefault()
+        openMenu()
+    })
     
-</header>
+    closeBtn?.addEventListener('click', (e) => {
+        e.preventDefault()
+        closeMenu()
+    })
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu && !menu.classList.contains('hidden')) {
+            closeMenu()
+        }
+    })
+
+    // Close when clicking backdrop
+    backdrop?.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+            closeMenu()
+        }
+    })
+
+    // Close menu when clicking navigation links (improves UX)
+    const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a')
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Small delay to allow navigation to start
+            setTimeout(closeMenu, 100)
+        })
+    })
+</script>
