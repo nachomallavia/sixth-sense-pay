@@ -4,8 +4,8 @@ import '../styles/starwind.css'
 import Header from "@/components/global/Header.astro"
 
 interface Props {
-    locale: string
-    i18n: any
+    locale: string | undefined
+    i18n: any | undefined
 }
 
 const { locale, i18n } = Astro.props

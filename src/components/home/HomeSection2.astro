@@ -1,0 +1,71 @@
+---
+const {currentLocale} =    Astro.props
+import HomeSection2aImage from "@/assets/home-section-2-a.png"
+import HomeSection2bImage from "@/assets/home-section-2-b.png"
+import HomeSection2cImage from "@/assets/home-section-2-c.png"
+import HomeSection2dImage from "@/assets/home-section-2-d.png"
+import Button from "@/components/starwind/button"
+const localesContent = {
+    "en":{
+       slide1: "Buy tokens with fiat or crypto.<br>Onramping and Offramping of Stablecoins.",
+       slide2: "Instant withdrawals to bank accounts.",
+       slide3: "DEFI wallet infrastructure.",
+       slide4: "Support for USDT and USDC (ERC-20 / TRC-20).",
+    },
+    "es":{
+        slide1: "Compra de tokens con fiat o cripto.<br>Onramping y Offramping de Stablecoins.",
+
+        slide2: "Retiros instantáneos a cuentas bancarias.",
+        slide3: "Infraestructura de billetera DEFI.",
+        slide4: "Soporte para USDTy USDC (ERC-20 / TRC-20).",
+        
+        
+        
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+
+<section id="home-section-2" class="mx-auto  w-full border-t-1 border-foreground">
+    <div class="flex flex-col lg:flex-row items-center justify-center w-full mx-auto">
+
+        <div class="izquierda h-[calc(100vh)] w-1/2 flex flex-col gap-0 overflow-scroll no-scrollbar [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-track]:hidden [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar-thumb:hover]:hidden border-r-1 border-foreground scroll-snap-y snap-mandatory">
+            <div class="block h-full bg-accent snap-start" data-slide="1">
+                <img src={HomeSection2aImage.src} alt="Sixth Sense Pay" class="w-full" />
+            </div>
+            <div class="flex items-center justify-center w-full h-full bg-primary snap-start" data-slide="2">
+                 <img src={HomeSection2bImage.src} alt="Sixth Sense Pay" class="w-full" />
+            </div>
+            <div class="flex items-center justify-center w-full h-full bg-secondary snap-start" data-slide="3">
+                <img src={HomeSection2cImage.src} alt="Sixth Sense Pay" class="w-full" />
+            </div>
+            <div class="flex items-center justify-center w-full h-full bg-primary snap-start" data-slide="4">
+                <img src={HomeSection2dImage.src} alt="Sixth Sense Pay" class="w-full" />
+            </div>
+        </div>
+
+        <div class="derecha w-1/2 h-full flex flex-col items-center justify-center px-12">
+            <div class="flex flex-col items-start justify-center gap-8 w-3/4">
+               <h2 class="text-4xl font-bold" set:html={content.slide1} data-slide-btn="1"></h2>
+               <h2 class="text-xl font-light" set:html={content.slide2} data-slide-btn="2"></h2>
+               <h2 class="text-xl font-light" set:html={content.slide3} data-slide-btn="3"></h2>
+               <h2 class="text-xl font-light" set:html={content.slide4} data-slide-btn="4"></h2>
+            </div>  
+         
+        </div>
+    </div>
+</section>
+
+<script>
+    const slideBtns = document.querySelectorAll('[data-slide-btn]');
+    slideBtns.forEach(slideBtn => {
+        slideBtn.addEventListener('click', () => {
+            const slideNumber = slideBtn.getAttribute('data-slide-btn');
+            const slide = document.querySelector(`[data-slide="${slideNumber}"]`);
+            if (slide) {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>

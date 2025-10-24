@@ -13,7 +13,7 @@ interface Props {
 const {i18n, currentLocale} = Astro.props
 ---
 
-<header class="flex justify-center items-center p-4 bg-primary">
+<header class="flex justify-center items-center p-4 bg-primary fixed top-0 left-0 right-0 z-50">
     <div class="flex items-center justify-between gap-8 w-full max-w-[1440px]">
         <!-- Logo -->
         <a href={i18n.navigation.home.url}>
@@ -52,6 +52,7 @@ const {i18n, currentLocale} = Astro.props
         </button>
     </div>
 </header>
+<div id="header-spacer" class="h-20 lg:h-16"></div>
 
 <!-- Mobile Menu Overlay (initially hidden) -->
 <div id="mobile-menu" class="fixed inset-0 z-50 hidden md:hidden">
@@ -59,7 +60,7 @@ const {i18n, currentLocale} = Astro.props
     <div id="mobile-menu-backdrop" class="absolute inset-0 bg-primary"></div>
     
     <!-- Mobile Menu Container -->
-    <div class="relative h-full flex flex-col">
+    <div class="relative h-full flex flex-col ">
         <!-- Header with Logo (always visible) -->
         <div class="relative z-10 flex items-center justify-between p-4 flex-shrink-0">
             <a href={i18n.navigation.home.url}>

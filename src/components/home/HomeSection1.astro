@@ -18,15 +18,18 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-1" class="mx-auto px-4 py-16 w-full h-full">
+<section id="home-section-1" class="mx-auto px-4 py-6 lg:py-12 w-full h-full">
     <div class="flex flex-col lg:flex-row gap-2 items-center justify-center w-full max-w-[1440px] mx-auto">
-        <div class="flex flex-col items-start justify-start">
-            <h1 class="text-7xl font-bold" set:html={content.title}></h1>
-            <p set:html={content.description} class="text-2xl font-light mt-4 text-muted-foreground"></p>
-            <Button variant="primary" size="lg" class="text-xl py-6 px-12 mt-8">{content.button}</Button>    
+        <div class="flex flex-col gap-6 lg:gap-0 items-start justify-start">
+            <h1 class="text-6xl lg:text-7xl font-bold" set:html={content.title}></h1>
+            <div class="flex overflow-hidden w-full h-auto">
+            <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="block scale-115 lg:hidden w-full h-auto" />
+            </div>
+            <p set:html={content.description} class="text-xl lg:text-2xl font-light lg:mt-6 text-muted-foreground"></p>
+            <Button variant="primary" size="lg" class="text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>    
         </div>
 
-        <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="w-1/2 h-1/2" />
+        <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-1/2 lg:h-1/2" />
     </div>
     </div>
 </section>
