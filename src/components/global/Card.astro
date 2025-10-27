@@ -1,0 +1,15 @@
+---
+const {title, description, image} = Astro.props as {
+  number: number;
+  title: string;
+  description?: string;
+  image?: ImageMetadata;
+}
+import type { ImageMetadata } from "astro";
+---
+
+<div class="flex flex-col max-w-[360px] items-center justify-center gap-4 bg-white border-1 border-foreground rounded-lg p-4 hover:translate-y-[-16px] hover:shadow-[4px_8px_0px_-1px_rgba(0,0,0,0.1)] shadow-accent transition-all duration-200">
+    <img src={image?.src} alt={title} class="w-8/10 h-auto" />
+    <h2 class="text-xl font-semibold text-center">{title}</h2>
+    <p class="text-base">{description}</p>
+</div>

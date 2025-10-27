@@ -1,21 +1,65 @@
 ---
 const {currentLocale} = Astro.props
-
+import Step from "@/components/howItWorks/step.astro"
 const localesContent = {
     "en":{
         heading: "How It Works",
-        description: "Discover how our payment system works seamlessly."
+        description: "Discover how our payment system works seamlessly.",
+        steps: [
+            {
+                number: 1,
+                description: "The user funds the wallet with ARS or USDT.",
+
+            },
+            {
+                number: 2,
+                description: "The platform credits the user's balance in the game.",
+            },
+            {
+                number: 3,
+                description: "The user wins → instant withdrawal via CVU.",
+            },
+            {
+                number: 4,
+                description: "The platform liquidates in crypto or FIAT.",
+            }
+        ]
     },
     "es":{
         heading: "Cómo funciona",
-        description: "Descubre cómo funciona nuestro sistema de pagos sin problemas."
+        description: "Descubre cómo funciona nuestro sistema de pagos sin problemas.",
+        steps: [
+            {
+                number: 1,
+                description: "El usuario fondea la billetera con ARS o USDT",
+            },
+            {
+                number: 2,
+                description: "La plataforma acredita su saldo en el juego",
+            },
+            {
+                number: 3,
+                description: "El usuario gana → retiro instantáneo vía CVU",
+            },
+            {
+                number: 4,
+                description: "La plataforma liquida en cripto o FIAT",
+            }
+        ]
     }
 }
 
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section class="container mx-auto px-4 py-16 max-w-[1440px]">
+<section class="mx-auto py-16  w-full h-full bg-secondary">
+    <div class="flex flex-col w-full mx-auto gap-4 items-center justify-center">
     <h1 class="text-4xl font-bold mb-6">{content.heading}</h1>
     <p class="text-lg">{content.description}</p>
+</div>    </div>
+    <div class="flex flex-col w-full mx-auto">
+        {content.steps.map((step) => (
+            <Step key={step.number} number={step.number} description={step.description} />
+        ))}
+    </div>
 </section>

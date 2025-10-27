@@ -1,10 +1,11 @@
 ---
 import MainLayout from "@/layouts/mainLayout.astro"
 import HowItWorksSection1 from "@/components/howItWorks/HowItWorksSection1.astro"
+import HowItWorksSection2 from "@/components/howItWorks/HowItWorksSection2.astro"
 import { actions } from 'astro:actions'
 
 // Get locale from URL parameter
-const { locale } = Astro.params
+const { locale } = Astro.params as { locale: string }
 
 // Load content for the locale
 const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale })
@@ -17,5 +18,6 @@ if (error) {
 
 <MainLayout locale={locale} i18n={i18n}>
     <HowItWorksSection1 currentLocale={locale} />
+    <HowItWorksSection2 currentLocale={locale} />
 </MainLayout>
 
