@@ -1,21 +1,47 @@
 ---
 const {currentLocale} = Astro.props
-
+import i18nContent from "@/i18n/content.json"
+import MissionImage from "@/assets/MissionImage.png"
+import VisionImage from "@/assets/VisionImage.png"
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
 const localesContent = {
     "en":{
-        heading: "About Sixth Sense Pay",
-        description: "We are revolutionizing the payment industry with innovative solutions."
+        mission: "Our mission is to provide a regulated and intuitive payment gateway that connects users and platforms to the crypto and traditional financial world. We facilitate the on-ramp and off-ramp of stablecoins to FIAT with instant withdrawals and easy-to-integrate APIs, so that payment processors, gaming platforms or remittance platforms can focus on growing, while we guarantee security, compliance and a frictionless payment experience.",
+        missionTitle: "Mission",
+        vision: "Our vision is to be a reliable and simple payment infrastructure in Latin America, allowing any digital platform —from games to remittances— to integrate secure solutions to move value between stablecoins and FIAT money instantly, regulated and accessible.",
+        visionTitle: "Vision",
     },
     "es":{
-        heading: "Acerca de Sixth Sense Pay",
-        description: "Estamos revolucionando la industria de pagos con soluciones innovadoras."
+        mission: 'Ofrecer una pasarela de pagos intuitiva y regulada que conecte a usuarios y plataformas con el mundo cripto y financiero tradicional.Facilitamos el on-ramp y off-ramp de stablecoins a FIAT con retiros instantáneos y APIs fáciles de integrar, para que procesadoras de pagos, plataformas de juego o de remesas puedan enfocarse en crecer, mientras nosotros garantizamos seguridad, cumplimiento y una experiencia de pago sin fricciones.',
+        missionTitle: "Misión",
+        vision: "Ser una infraestructura de pagos confiable y sencilla en Latino America, permitiendo que cualquier plataforma digital —desde juegos hasta remesas— pueda integrar, soluciones seguras para mover valor entre monedas estables y dinero FIAT de manera inmediata, regulada y accesible.",
+        visionTitle: "Visión",
     }
 }
 
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section class="container mx-auto px-4 py-16 max-w-[1440px]">
-    <h1 class="text-4xl font-bold mb-6">{content.heading}</h1>
-    <p class="text-lg">{content.description}</p>
+<section class=" mx-auto px-4 lg:px-0 py-16 flex flex-col ">
+    <div class="flex flex-row gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
+        <div class="relative w-2/5 h-auto flex items-center justify-center">            
+            <img src={MissionImage.src} alt="Sixth Sense Pay" class="w-80/100 h-auto relative" />
+        </div>
+
+        <div class="flex flex-col gap-6 w-3/5">
+            <h2 class="text-4xl font-bold ">{content.missionTitle}</h2>
+            <p class="text-lg font-light">{content.mission}</p>
+        </div>
+    </div>
+    <div class="separator w-full h-[1px] bg-foreground my-12"></div>
+    <div class="flex flex-row gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
+        <div class="relative w-2/5 h-auto flex items-center justify-center">            
+            <img src={VisionImage.src} alt="Sixth Sense Pay" class="w-80/100 h-auto relative" />
+        </div>
+
+        <div class="flex flex-col gap-6 w-3/5">
+            <h2 class="text-4xl font-bold ">{content.visionTitle}</h2>
+            <p class="text-lg font-light">{content.vision}</p>
+        </div>
+    </div>
 </section>

@@ -27,26 +27,26 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-2" class="mx-auto w-full border-t-1 border-foreground scroll-snap-y snap-mandatory scroll-padding-t-16 sticky top-20 lg:top-16">
-    <div class="flex flex-col lg:flex-row items-center justify-center w-full mx-auto">
+<section id="home-section-2" class="relative w-full h-[calc((100vh-5rem)*4)] lg:h-[calc((100vh-4rem)*4)] border-t-1 border-foreground border-b-1 bg-secondary">
+    <div class="sticky top-20 lg:top-16 h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row items-center justify-center w-full mx-auto">
 
-        <div class="left-section h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] w-1/2 flex flex-col gap-0 overflow-scroll no-scrollbar [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-track]:hidden [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar-thumb:hover]:hidden border-r-1 border-foreground scroll-snap-y snap-mandatory scroll-snap-align-start scroll-snap-always scroll-padding-t-16">
-            <div class="block min-h-full bg-accent snap-start" data-slide="1">
+        <div class="left-section h-full w-full lg:w-1/2 flex flex-col gap-0 overflow-y-scroll no-scrollbar [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-track]:hidden [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar-thumb:hover]:hidden border-r-1 border-foreground snap-y snap-mandatory">
+            <div class="flex items-center justify-center h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-accent snap-start snap-always" data-slide="1">
                 <img src={HomeSection2aImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full min-h-full bg-primary snap-start" data-slide="2">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="2">
                  <img src={HomeSection2bImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full min-h-full bg-secondary snap-start" data-slide="3">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-secondary snap-start snap-always" data-slide="3">
                 <img src={HomeSection2cImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full min-h-full bg-primary snap-start" data-slide="4">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="4">
                 <img src={HomeSection2dImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
         </div>
 
-        <div class="right-section w-1/2 h-full flex flex-col items-center justify-center px-12">
-            <div class="flex flex-col items-start justify-center gap-16 w-8/10">
+        <div class="right-section w-full lg:w-1/2 h-full relative top-1/2 -translate-y-1/2 flex flex-col items-center justify-center px-12">
+            <div class="flex flex-col items-start justify-center gap-16 w-8/10 absolute top-1/2 -translate-y-1/2">
                <h2 class="text-2xl font-light cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out origin-left" set:html={content.slide1} data-slide-btn="1"></h2>
                <h2 class="text-2xl font-light cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out origin-left" set:html={content.slide2} data-slide-btn="2"></h2>
                <h2 class="text-2xl font-light cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out origin-left" set:html={content.slide3} data-slide-btn="3"></h2>
@@ -60,7 +60,8 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
 <script>
     const slideBtns = document.querySelectorAll('[data-slide-btn]');
     const slides = document.querySelectorAll('[data-slide]');
-    const leftSection = document.querySelector('.left-section');
+    const leftSection = document.querySelector('.left-section') as HTMLElement;
+    const parentSection = document.querySelector('#home-section-2') as HTMLElement;
 
     // Click handler for text elements
     slideBtns.forEach(slideBtn => {
@@ -90,6 +91,50 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
             }
         });
     }
+
+    // Function to sync parent section scroll with left section scroll
+    function syncParentScroll() {
+        if (!leftSection || !parentSection) return;
+
+        // Speed multiplier - higher values make parent scroll faster
+        // 1.0 = 1:1 sync, 2.0 = parent scrolls twice as fast, etc.
+        const speedFactor = 1.5;
+
+        // Calculate scroll progress of left section (0 to 1)
+        const scrollTop = leftSection.scrollTop;
+        const scrollHeight = leftSection.scrollHeight - leftSection.clientHeight;
+        let scrollProgress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+        // Apply speed factor and clamp to 0-1 range
+        scrollProgress = Math.min(scrollProgress * speedFactor, 1);
+
+        // Get parent section's position and height
+        const parentRect = parentSection.getBoundingClientRect();
+        const parentTop = parentSection.offsetTop;
+        const parentHeight = parentSection.offsetHeight;
+        const viewportHeight = window.innerHeight;
+
+        // Calculate target scroll position for window
+        // We want to scroll from the top of the section to the bottom
+        const maxParentScroll = parentHeight - viewportHeight;
+        const targetWindowScroll = parentTop + (maxParentScroll * scrollProgress);
+
+        // Smoothly scroll the window to match
+        window.scrollTo({
+            top: targetWindowScroll,
+            behavior: 'smooth'
+        });
+    }
+
+    // Add scroll listener to left section
+    let scrollTimeout: number;
+    leftSection?.addEventListener('scroll', () => {
+        // Debounce the sync to avoid too many calls
+        clearTimeout(scrollTimeout);
+        scrollTimeout = window.setTimeout(() => {
+            syncParentScroll();
+        }, 50);
+    });
 
     // IntersectionObserver to detect which slide is in view
     const observerOptions = {

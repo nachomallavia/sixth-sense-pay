@@ -2,6 +2,9 @@
 const {currentLocale} =    Astro.props
 import HomeSection1Image from "@/assets/home-section-1.png"
 import Button from "@/components/starwind/button"
+import i18nContent from "@/i18n/content.json"
+
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
 const localesContent = {
     "en":{
         title: "Crypto Payments.<br>Fully Regulated.",
@@ -18,7 +21,7 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-1" class="mx-auto px-4 py-6 lg:py-12 w-full h-full">
+<section id="home-section-1" class="mx-auto px-4 py-6 lg:py-12 w-full h-full bg-secondary">
     <div class="flex flex-col lg:flex-row gap-2 items-center justify-center w-full max-w-[1440px] mx-auto">
         <div class="flex flex-col gap-6 lg:gap-0 items-start justify-start">
             <h1 class="text-6xl lg:text-7xl font-bold" set:html={content.title}></h1>
@@ -26,7 +29,7 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
             <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="block scale-115 lg:hidden w-full h-auto" />
             </div>
             <p set:html={content.description} class="text-xl lg:text-2xl font-light lg:mt-6 text-muted-foreground"></p>
-            <Button variant="primary" size="lg" class="text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>    
+            <Button href={i18n.navigation.contact.url} variant="primary" size="lg" class="text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>    
         </div>
 
         <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-1/2 lg:h-1/2" />

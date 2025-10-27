@@ -2,6 +2,7 @@
 import MainLayout from "@/layouts/mainLayout.astro"
 import HomeSection1 from "@/components/home/HomeSection1.astro"
 import HomeSection2 from "@/components/home/HomeSection2.astro"
+import HomeSection3 from "@/components/home/HomeSection3.astro"
 import { actions } from 'astro:actions'
 // Get locale from URL parameter
 const { locale } = Astro.params
@@ -16,7 +17,10 @@ if (error) {
 ---
 
 <MainLayout locale={locale || 'en'} i18n={i18n}>
+    <div class="bg-secondary">
     <HomeSection1 currentLocale={locale} />
-    <HomeSection2 currentLocale={locale} />
+        <HomeSection2 currentLocale={locale} />
+        <HomeSection3 currentLocale={locale} />
+    </div>
 </MainLayout>
 

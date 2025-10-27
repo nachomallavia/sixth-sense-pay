@@ -1,0 +1,14 @@
+---
+const {currentLocale} = Astro.props
+import i18nContent from "@/i18n/content.json"
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
+const localesContent = {
+    "en":{
+        title: "Footer",
+    },
+    "es":{
+        title: "Footer",
+    }
+}
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---

@@ -1,0 +1,142 @@
+---
+const {currentLocale} =    Astro.props
+import HomeSection3Image from "@/assets/home-section-3.png"
+import LogoMain from "@/assets/logo-main-1color-fondo-claro@2x.png"
+
+import Button from "@/components/starwind/button"
+import i18nContent from "@/i18n/content.json"
+
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
+const localesContent = {
+    "en":{
+        
+        button: "Ask for a demo"
+    },
+    "es":{
+         button: "Solicitar Demo"
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+<section id="home-section-3" class="section-wrapper w-full h-fullz-100">
+    <div class="section-content mx-auto px-4 py-6 lg:py-12 w-full h-full relative bg-primary">
+        <div class="flex flex-col gap-2 items-center justify-center w-full max-w-[1440px] mx-auto relative">
+            <Button href={i18n.navigation.contact.url} variant="primary" size="lg" class="z-100 absolute bottom-[40%] left-[50%] translate-x-[-50%] text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>
+            <img src={HomeSection3Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-3/4 lg:h-auto" />
+            <img src={LogoMain.src} alt="Sixth Sense Pay" class=" lg:block lg:w-1/4 lg:h-auto mt-[-200px]" />
+        </div>
+    </div>
+</section>
+
+<style>
+    .section-wrapper {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .section-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(
+            50% 0%,
+            93.3% 25%,
+            93.3% 75%,
+            50% 100%,
+            6.7% 75%,
+            6.7% 25%
+        );
+        transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+</style>
+
+<script>
+    // Calculate hexagon clip-path maintaining company logo proportions
+    // Based on: M159.5 40.3086V119.69L80 159.44L0.5 119.69V40.3086L80 0.558594L159.5 40.3086Z
+    function calculateHexagonClipPath(size: number, centerX: number, centerY: number, viewportWidth: number, viewportHeight: number) {
+        // Original hexagon proportions (pointy-top orientation)
+        // Normalized coordinates from 0 to 1
+        const vertices = [
+            { x: 0.503, y: 0.0035 },  // Top
+            { x: 1.0,   y: 0.254 },   // Top right
+            { x: 1.0,   y: 0.753 },   // Bottom right
+            { x: 0.503, y: 1.0 },     // Bottom
+            { x: 0.0,   y: 0.753 },   // Bottom left
+            { x: 0.0,   y: 0.254 }    // Top left
+        ];
+        
+        // Calculate hexagon points based on size (centered on centerX, centerY)
+        const points = vertices.map(v => {
+            const x = centerX + (v.x - 0.5) * size;
+            const y = centerY + (v.y - 0.5) * size;
+            return {
+                x: (x / viewportWidth) * 100,
+                y: (y / viewportHeight) * 100
+            };
+        });
+        
+        return `polygon(
+            ${points[0].x}% ${points[0].y}%,
+            ${points[1].x}% ${points[1].y}%,
+            ${points[2].x}% ${points[2].y}%,
+            ${points[3].x}% ${points[3].y}%,
+            ${points[4].x}% ${points[4].y}%,
+            ${points[5].x}% ${points[5].y}%
+        )`;
+    }
+
+    // Full viewport hexagon (same proportions, scaled beyond viewport to eliminate side gaps)
+    const fullHexagon = 'polygon(50% -25%, 175% 25.4%, 175% 75.3%, 50% 120%, -75% 75.3%, -75% 25.4%)';
+
+    // Scroll animation using Intersection Observer
+    const section = document.querySelector('#home-section-3') as HTMLElement;
+    const content = section?.querySelector('.section-content') as HTMLElement;
+    
+    if (section && content) {
+        // Set initial 160px hexagon at center of section
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = section.offsetHeight;
+        const centerX = viewportWidth / 2;
+        const centerY = viewportHeight / 2;
+        
+        const initialClipPath = calculateHexagonClipPath(160, centerX, centerY, viewportWidth, viewportHeight);
+        content.style.clipPath = initialClipPath;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Expand to full hexagon
+                    content.style.clipPath = fullHexagon;
+                } else {
+                    // Shrink back to 160px hexagon
+                    content.style.clipPath = initialClipPath;
+                }
+            });
+        }, {
+            threshold: 0.5,
+            rootMargin: '0px'
+        });
+        
+        observer.observe(section);
+        
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+            const newViewportWidth = window.innerWidth;
+            const newViewportHeight = section.offsetHeight;
+            const newCenterX = newViewportWidth / 2;
+            const newCenterY = newViewportHeight / 2;
+            const newInitialClipPath = calculateHexagonClipPath(160, newCenterX, newCenterY, newViewportWidth, newViewportHeight);
+            
+            if (content.style.clipPath !== fullHexagon) {
+                content.style.clipPath = newInitialClipPath;
+            }
+        });
+    }
+</script>
+
