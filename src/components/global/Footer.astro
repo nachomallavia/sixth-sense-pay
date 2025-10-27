@@ -1,14 +1,24 @@
 ---
-const {currentLocale} = Astro.props
-import i18nContent from "@/i18n/content.json"
-const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
-const localesContent = {
-    "en":{
-        title: "Footer",
-    },
-    "es":{
-        title: "Footer",
-    }
-}
-const content = localesContent[currentLocale as keyof typeof localesContent]
+const {i18n, currentLocale} = Astro.props
+import Logo from "@/assets/logo-main-marfil-sobre-negro@2x.png"
 ---
+
+<footer class="bg-foreground text-secondary">
+    <div class=" mx-auto px-4 py-8 flex justify-between max-w-[1440px] items-center">
+        <div>
+            <img src={Logo.src} alt="Sixth Sense Pay" class="w-32  ml-0 h-auto" />
+        </div>
+        <div class="flex flex-row gap-4 items-start justify-start">
+            <a href={i18n.navigation.home.url} class="text-secondary">{i18n.navigation.home.title}</a>
+            <a href={i18n.navigation.about.url} class="text-secondary">{i18n.navigation.about.title}</a>
+            <a href={i18n.navigation.howItWorks.url} class="text-secondary">{i18n.navigation.howItWorks.title}</a>
+            <a href={i18n.navigation.platforms.url} class="text-secondary">{i18n.navigation.platforms.title}</a>
+            <a href={i18n.navigation.users.url} class="text-secondary">{i18n.navigation.users.title}</a>
+            <a href={i18n.navigation.contact.url} class="text-secondary">{i18n.navigation.contact.title}</a>
+        </div>
+        <div class="flex flex-col gap-4 items-end justify-start text-lg">
+            <a href={i18n.footer.navigation.privacyPolicy.url} class="text-secondary underline underline-offset-4">{i18n.footer.navigation.privacyPolicy.title}</a>
+            <a href={i18n.footer.navigation.termsOfService.url} class="text-secondary underline underline-offset-4">{i18n.footer.navigation.termsOfService.title}</a>
+        </div>
+    </div>
+</footer>

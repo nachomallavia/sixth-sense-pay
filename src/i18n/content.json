@@ -1,5 +1,17 @@
 {
     "en": {
+        "footer": {
+            "navigation": {
+                "privacyPolicy": {
+                    "title": "Privacy Policy",
+                    "url": "/en/privacy-policy"
+                },
+                "termsOfService": {
+                    "title": "Terms of Service",
+                    "url": "/en/terms-of-service"
+                }
+            }
+        },
         "seo": {
             "title": "Sixth Sense Pay - Smart Payment Solutions",
             "description": "Revolutionizing payments with sixth sense technology"
@@ -36,6 +48,18 @@
         }
     },
     "es": {
+        "footer": {
+            "navigation": {
+                "privacyPolicy": {
+                    "title": "Política de Privacidad",
+                    "url": "/es/privacy-policy"
+                },
+                "termsOfService": {
+                    "title": "Términos y Condiciones",
+                    "url": "/es/terms-of-service"
+                }
+            }
+        },
         "seo": {
             "title": "Sixth Sense Pay - Soluciones de Pago Inteligentes",
             "description": "Revolucionando los pagos con tecnología de sexto sentido"
