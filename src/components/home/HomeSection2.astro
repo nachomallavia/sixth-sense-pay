@@ -27,25 +27,74 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-2" class="relative w-full h-[calc((100vh-5rem)*4)] lg:h-[calc((100vh-4rem)*4)] border-t-1 border-foreground border-b-1 bg-secondary">
-    <div class="sticky top-20 lg:top-16 h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row items-center justify-center w-full mx-auto">
+<!-- Mobile Carousel Version -->
+<section id="home-section-2-mobile" class="lg:hidden relative w-full border-t-1 border-foreground border-b-1 bg-secondary py-12">
+    <div class="w-full">
+        <!-- Carousel Container -->
+        <div class="carousel-container overflow-x-scroll snap-x snap-mandatory flex gap-0 no-scrollbar [&::-webkit-scrollbar]:hidden" id="mobile-carousel">
+            <!-- Slide 1 -->
+            <div class="carousel-slide min-w-full snap-start snap-always flex flex-col items-center justify-center px-6 py-8 gap-6" data-mobile-slide="1">
+                <div class="w-full max-w-md flex items-center justify-center bg-accent rounded-lg overflow-hidden">
+                    <img src={HomeSection2aImage.src} alt="Sixth Sense Pay" class="w-full h-auto" />
+                </div>
+                <h2 class="text-2xl font-bold text-center px-4" set:html={content.slide1}></h2>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-slide min-w-full snap-start snap-always flex flex-col items-center justify-center px-6 py-8 gap-6" data-mobile-slide="2">
+                <div class="w-full max-w-md flex items-center justify-center bg-primary rounded-lg overflow-hidden">
+                    <img src={HomeSection2bImage.src} alt="Sixth Sense Pay" class="w-full h-auto" />
+                </div>
+                <h2 class="text-2xl font-bold text-center px-4" set:html={content.slide2}></h2>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-slide min-w-full snap-start snap-always flex flex-col items-center justify-center px-6 py-8 gap-6" data-mobile-slide="3">
+                <div class="w-full max-w-md flex items-center justify-center bg-accent rounded-lg overflow-hidden">
+                    <img src={HomeSection2cImage.src} alt="Sixth Sense Pay" class="w-full h-auto" />
+                </div>
+                <h2 class="text-2xl font-bold text-center px-4" set:html={content.slide3}></h2>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-slide min-w-full snap-start snap-always flex flex-col items-center justify-center px-6 py-8 gap-6" data-mobile-slide="4">
+                <div class="w-full max-w-md flex items-center justify-center bg-primary rounded-lg overflow-hidden">
+                    <img src={HomeSection2dImage.src} alt="Sixth Sense Pay" class="w-full h-auto" />
+                </div>
+                <h2 class="text-2xl font-bold text-center px-4" set:html={content.slide4}></h2>
+            </div>
+        </div>
+        
+        <!-- Dot Indicators -->
+        <div class="flex justify-center items-center gap-3 mt-8">
+            <button class="carousel-dot w-3 h-3 rounded-full bg-foreground transition-all duration-300" data-dot="1" aria-label="Go to slide 1"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-foreground/30 transition-all duration-300" data-dot="2" aria-label="Go to slide 2"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-foreground/30 transition-all duration-300" data-dot="3" aria-label="Go to slide 3"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-foreground/30 transition-all duration-300" data-dot="4" aria-label="Go to slide 4"></button>
+        </div>
+    </div>
+</section>
 
-        <div class="left-section h-full w-full lg:w-1/2 flex flex-col gap-0 overflow-y-scroll no-scrollbar [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-track]:hidden [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar-thumb:hover]:hidden border-r-1 border-foreground snap-y snap-mandatory">
-            <div class="flex items-center justify-center h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-accent snap-start snap-always" data-slide="1">
+<!-- Desktop Version -->
+<section id="home-section-2" class="hidden lg:block relative w-full h-[calc((100vh-4rem)*4)] border-t-1 border-foreground border-b-1 bg-secondary">
+    <div class="sticky top-16 h-[calc(100vh-4rem)] flex flex-row items-center justify-center w-full mx-auto">
+
+        <div class="left-section h-full w-1/2 flex flex-col gap-0 overflow-y-scroll no-scrollbar [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-track]:hidden [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar-thumb:hover]:hidden border-r-1 border-foreground snap-y snap-mandatory">
+            <div class="flex items-center justify-center h-[calc(100vh-4rem)] min-h-full bg-accent snap-start snap-always" data-slide="1">
                 <img src={HomeSection2aImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="2">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="2">
                  <img src={HomeSection2bImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-secondary snap-start snap-always" data-slide="3">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-4rem)] min-h-full bg-accent snap-start snap-always" data-slide="3">
                 <img src={HomeSection2cImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
-            <div class="flex items-center justify-center w-full h-[calc(100vh-5rem)] lg:h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="4">
+            <div class="flex items-center justify-center w-full h-[calc(100vh-4rem)] min-h-full bg-primary snap-start snap-always" data-slide="4">
                 <img src={HomeSection2dImage.src} alt="Sixth Sense Pay" class="w-full" />
             </div>
         </div>
 
-        <div class="right-section w-full lg:w-1/2 h-full relative top-1/2 -translate-y-1/2 flex flex-col items-center justify-center px-12">
+        <div class="right-section w-1/2 h-full relative top-1/2 -translate-y-1/2 flex flex-col items-center justify-center px-12">
             <div class="flex flex-col items-start justify-center gap-16 w-8/10 absolute top-1/2 -translate-y-1/2">
                <h2 class="text-2xl font-light cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out origin-left" set:html={content.slide1} data-slide-btn="1"></h2>
                <h2 class="text-2xl font-light cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out origin-left" set:html={content.slide2} data-slide-btn="2"></h2>
@@ -58,6 +107,59 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
 </section>
 
 <script>
+    // ===== MOBILE CAROUSEL FUNCTIONALITY =====
+    const mobileCarousel = document.getElementById('mobile-carousel') as HTMLElement;
+    const mobileSlides = document.querySelectorAll('[data-mobile-slide]');
+    const carouselDots = document.querySelectorAll('[data-dot]');
+
+    // Function to update active dot
+    function updateActiveDot(slideNumber: string) {
+        carouselDots.forEach(dot => {
+            const dotNumber = dot.getAttribute('data-dot');
+            if (dotNumber === slideNumber) {
+                dot.classList.remove('bg-foreground/30');
+                dot.classList.add('bg-foreground');
+            } else {
+                dot.classList.remove('bg-foreground');
+                dot.classList.add('bg-foreground/30');
+            }
+        });
+    }
+
+    // Click handler for dots
+    carouselDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const slideNumber = dot.getAttribute('data-dot');
+            const slide = document.querySelector(`[data-mobile-slide="${slideNumber}"]`);
+            if (slide && mobileCarousel) {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+        });
+    });
+
+    // IntersectionObserver for mobile carousel
+    if (mobileCarousel) {
+        const mobileObserverOptions = {
+            root: mobileCarousel,
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const mobileObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideNumber = entry.target.getAttribute('data-mobile-slide');
+                    if (slideNumber) {
+                        updateActiveDot(slideNumber);
+                    }
+                }
+            });
+        }, mobileObserverOptions);
+
+        mobileSlides.forEach(slide => mobileObserver.observe(slide));
+    }
+
+    // ===== DESKTOP FUNCTIONALITY =====
     const slideBtns = document.querySelectorAll('[data-slide-btn]');
     const slides = document.querySelectorAll('[data-slide]');
     const leftSection = document.querySelector('.left-section') as HTMLElement;
@@ -158,5 +260,7 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
     slides.forEach(slide => observer.observe(slide));
 
     // Set initial active state (slide 1)
-    updateActiveText('1');
+    if (slideBtns.length > 0) {
+        updateActiveText('1');
+    }
 </script>

@@ -22,26 +22,70 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section class=" mx-auto px-4 lg:px-0 py-16 flex flex-col ">
-    <div class="flex flex-row gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
-        <div class="relative w-2/5 h-auto flex items-center justify-center">            
-            <img src={MissionImage.src} alt="Sixth Sense Pay" class="w-80/100 h-auto relative" />
+<section class="mx-auto px-4 lg:px-0 py-2 lg:py-16 flex flex-col">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
+        <div class="relative w-full lg:w-2/5 h-auto flex items-center justify-center" data-about-image="mission" style="opacity: 0;">            
+            <img src={MissionImage.src} alt="Sixth Sense Pay" class="w-full lg:w-80/100 h-auto relative" />
         </div>
 
-        <div class="flex flex-col gap-6 w-3/5">
-            <h2 class="text-4xl font-bold ">{content.missionTitle}</h2>
-            <p class="text-lg font-light">{content.mission}</p>
+        <div class="flex flex-col gap-6 w-full lg:w-3/5" data-about-text="mission" style="opacity: 0;">
+            <h2 class="text-3xl lg:text-4xl font-bold">{content.missionTitle}</h2>
+            <p class="text-base lg:text-lg font-light">{content.mission}</p>
         </div>
     </div>
     <div class="separator w-full h-[1px] bg-foreground my-12"></div>
-    <div class="flex flex-row gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
-        <div class="relative w-2/5 h-auto flex items-center justify-center">            
-            <img src={VisionImage.src} alt="Sixth Sense Pay" class="w-80/100 h-auto relative" />
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-2 items-center justify-center mx-auto w-full max-w-[1000px] my-12">
+        <div class="relative w-full lg:w-2/5 h-auto flex items-center justify-center" data-about-image="vision" style="opacity: 0;">            
+            <img src={VisionImage.src} alt="Sixth Sense Pay" class="w-full lg:w-80/100 h-auto relative" />
         </div>
 
-        <div class="flex flex-col gap-6 w-3/5">
-            <h2 class="text-4xl font-bold ">{content.visionTitle}</h2>
-            <p class="text-lg font-light">{content.vision}</p>
+        <div class="flex flex-col gap-6 w-full lg:w-3/5" data-about-text="vision" style="opacity: 0;">
+            <h2 class="text-3xl lg:text-4xl font-bold">{content.visionTitle}</h2>
+            <p class="text-base lg:text-lg font-light">{content.vision}</p>
         </div>
     </div>
 </section>
+
+<script>
+    import { inView } from 'motion'
+
+    // Get all about image and text elements
+    const imageElements = document.querySelectorAll('[data-about-image]')
+    const textElements = document.querySelectorAll('[data-about-text]')
+
+    // Animate image containers
+    imageElements.forEach((imageElement) => {
+        inView(imageElement, () => {
+            imageElement.animate(
+                [
+                    { opacity: 0, transform: 'translateY(40px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ],
+                {
+                    duration: 600,
+                    easing: 'ease-out',
+                    fill: 'forwards'
+                }
+            )
+        }, { amount: 0.3 })
+    })
+
+    // Animate text containers with delay
+    textElements.forEach((textElement) => {
+        inView(textElement, () => {
+            setTimeout(() => {
+                textElement.animate(
+                    [
+                        { opacity: 0, transform: 'translateY(40px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ],
+                    {
+                        duration: 600,
+                        easing: 'ease-out',
+                        fill: 'forwards'
+                    }
+                )
+            }, 200)
+        }, { amount: 0.3 })
+    })
+</script>

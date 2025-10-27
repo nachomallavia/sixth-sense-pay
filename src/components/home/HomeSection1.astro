@@ -21,18 +21,60 @@ const localesContent = {
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section id="home-section-1" class="mx-auto px-4 py-6 lg:py-12 w-full h-full bg-secondary">
+<section id="home-section-1" class="mx-auto px-4 py-6 lg:py-12 w-full h-full bg-secondary pb-20 pt-12">
     <div class="flex flex-col lg:flex-row gap-2 items-center justify-center w-full max-w-[1440px] mx-auto">
-        <div class="flex flex-col gap-6 lg:gap-0 items-start justify-start">
-            <h1 class="text-6xl lg:text-7xl font-bold" set:html={content.title}></h1>
+        <div class="flex flex-col gap-8 lg:gap-0 items-start justify-start" data-home-text style="opacity: 0;">
+            <h1 class="text-5xl lg:text-7xl font-bold" set:html={content.title}></h1>
             <div class="flex overflow-hidden w-full h-auto">
             <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="block scale-115 lg:hidden w-full h-auto" />
             </div>
-            <p set:html={content.description} class="text-xl lg:text-2xl font-light lg:mt-6 text-muted-foreground"></p>
+            <p set:html={content.description} class="text-lg lg:text-2xl font-light lg:mt-6 text-muted-foreground"></p>
             <Button href={i18n.navigation.contact.url} variant="primary" size="lg" class="text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>    
         </div>
 
-        <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-1/2 lg:h-1/2" />
+        <img src={HomeSection1Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-1/2 lg:h-1/2" data-home-image style="opacity: 0;" />
     </div>
     </div>
 </section>
+
+<script>
+    import { inView } from 'motion'
+
+    // Animate text container first
+    const textElement = document.querySelector('[data-home-text]')
+    if (textElement) {
+        inView(textElement, () => {
+            textElement.animate(
+                [
+                    { opacity: 0, transform: 'translateY(40px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ],
+                {
+                    duration: 600,
+                    easing: 'ease-out',
+                    fill: 'forwards'
+                }
+            )
+        }, { amount: 0.3 })
+    }
+
+    // Animate image with delay (desktop only)
+    const imageElement = document.querySelector('[data-home-image]')
+    if (imageElement) {
+        inView(imageElement, () => {
+            setTimeout(() => {
+                imageElement.animate(
+                    [
+                        { opacity: 0, transform: 'translateY(40px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ],
+                    {
+                        duration: 600,
+                        easing: 'ease-out',
+                        fill: 'forwards'
+                    }
+                )
+            }, 200)
+        }, { amount: 0.3 })
+    }
+</script>

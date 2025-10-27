@@ -19,12 +19,12 @@ const localesContent = {
 
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
-<section id="home-section-3" class="section-wrapper w-full h-fullz-100">
-    <div class="section-content mx-auto px-4 py-6 lg:py-12 w-full h-full relative bg-primary">
-        <div class="flex flex-col gap-2 items-center justify-center w-full max-w-[1440px] mx-auto relative">
-            <Button href={i18n.navigation.contact.url} variant="primary" size="lg" class="z-100 absolute bottom-[40%] left-[50%] translate-x-[-50%] text-xl w-full lg:w-auto py-8 lg:mt-8 lg:px-12">{content.button}</Button>
-            <img src={HomeSection3Image.src} alt="Sixth Sense Pay" class="hidden lg:block lg:w-3/4 lg:h-auto" />
-            <img src={LogoMain.src} alt="Sixth Sense Pay" class=" lg:block lg:w-1/4 lg:h-auto mt-[-200px]" />
+<section id="home-section-3" class="section-wrapper w-full  z-100 border-t-1 border-foreground">
+    <div class="section-content mx-auto px-0 lg:px-4 py-0 lg:py-12 w-full  relative bg-primary">
+        <div class="flex flex-col gap-8 lg:gap-2 items-center justify-center w-full max-w-[1440px] mx-auto relative">
+            <img src={HomeSection3Image.src} alt="Sixth Sense Pay" class="w-full scale-110 lg:scale-100 lg:w-3/4 h-auto" />
+            <Button href={i18n.navigation.contact.url} variant="primary" size="lg" class="z-100 absolute bottom-[25%]  lg:bottom-[35%]  left-[50%] translate-x-[-50%] translate-y-[-50%] lg:translate-y-0 text-xl w-[calc(100%-2rem)] bg-neutral-950 hover:bg-neutral-950/80 lg:bg-primary lg:hover:bg-primary/90 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50 lg:w-auto py-8 lg:px-12">{content.button}</Button>
+            <img src={LogoMain.src} alt="Sixth Sense Pay" class="transparent w-full max-w-xs lg:max-w-none lg:w-1/4 h-auto lg:mt-[-200px]" />
         </div>
     </div>
 </section>
@@ -32,7 +32,7 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
 <style>
     .section-wrapper {
         position: relative;
-        min-height: 100vh;
+        /* min-height: 100vh; */
         width: 100%;
         display: flex;
         align-items: center;
@@ -99,13 +99,15 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
     const content = section?.querySelector('.section-content') as HTMLElement;
     
     if (section && content) {
-        // Set initial 160px hexagon at center of section
+        // Set initial hexagon at center of section (responsive size)
         const viewportWidth = window.innerWidth;
         const viewportHeight = section.offsetHeight;
         const centerX = viewportWidth / 2;
         const centerY = viewportHeight / 2;
         
-        const initialClipPath = calculateHexagonClipPath(160, centerX, centerY, viewportWidth, viewportHeight);
+        // Responsive initial size: 100px on mobile, 160px on desktop
+        const initialSize = viewportWidth < 1024 ? 100 : 160;
+        const initialClipPath = calculateHexagonClipPath(initialSize, centerX, centerY, viewportWidth, viewportHeight);
         content.style.clipPath = initialClipPath;
         
         const observer = new IntersectionObserver((entries) => {
@@ -131,7 +133,8 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
             const newViewportHeight = section.offsetHeight;
             const newCenterX = newViewportWidth / 2;
             const newCenterY = newViewportHeight / 2;
-            const newInitialClipPath = calculateHexagonClipPath(160, newCenterX, newCenterY, newViewportWidth, newViewportHeight);
+            const newInitialSize = newViewportWidth < 1024 ? 100 : 160;
+            const newInitialClipPath = calculateHexagonClipPath(newInitialSize, newCenterX, newCenterY, newViewportWidth, newViewportHeight);
             
             if (content.style.clipPath !== fullHexagon) {
                 content.style.clipPath = newInitialClipPath;

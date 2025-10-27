@@ -18,14 +18,58 @@ const stepImages = {
 const imageSide = number % 2 === 0 ? 'right' : 'left'
 ---
 
-<div class=`w-full h-[calc(100vh-5rem)] border-b-1 border-foreground ${imageSide === 'right' ? 'bg-white' : 'bg-secondary'}`>
-    <div class=`flex ${imageSide === 'right' ? 'flex-row-reverse' : 'flex-row'} gap-4 items-center justify-center w-full max-w-[1440px] mx-auto h-full`>
-        <div class="flex flex-row gap-4 items-center justify-end max-w-35/100">
-            <h2 class="text-9xl font-bold">{number}</h2>
-            <p class="text-4xl font-bold">{description}</p>
+<div class=`w-full min-h-[calc(100vh-5rem)] border-b-1 border-foreground ${imageSide === 'right' ? 'bg-white' : 'bg-secondary'}`>
+    <div class=`flex flex-col ${imageSide === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-4 items-center justify-center w-full max-w-[1440px] mx-auto h-full py-12 lg:py-0 px-6 lg:px-4`>
+        <div class="flex flex-row gap-4 items-center justify-center lg:justify-end w-full lg:max-w-35/100" data-step-text={number} style="opacity: 0;">
+            <h2 class="text-6xl lg:text-9xl font-bold">{number}</h2>
+            <p class="text-2xl lg:text-4xl font-bold">{description}</p>
         </div>
-        <div class="flex flex-col gap-4 items-end justify-start max-w-5/10">
+        <div class="flex flex-col gap-4 items-center lg:items-end justify-start w-full lg:max-w-5/10" data-step-image={number} style="opacity: 0;">
             <img src={stepImages[number as keyof typeof stepImages].src} alt={description} class="w-full h-auto" />
         </div>
     </div>
 </div>
+
+<script>
+    import { inView } from 'motion'
+
+    // Get all step text and image elements
+    const textElements = document.querySelectorAll('[data-step-text]')
+    const imageElements = document.querySelectorAll('[data-step-image]')
+
+    // Animate text containers
+    textElements.forEach((textElement) => {
+        inView(textElement, () => {
+            textElement.animate(
+                [
+                    { opacity: 0, transform: 'translateY(40px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ],
+                {
+                    duration: 600,
+                    easing: 'ease-out',
+                    fill: 'forwards'
+                }
+            )
+        }, { amount: 0.3 })
+    })
+
+    // Animate image containers with delay
+    imageElements.forEach((imageElement) => {
+        inView(imageElement, () => {
+            setTimeout(() => {
+                imageElement.animate(
+                    [
+                        { opacity: 0, transform: 'translateY(40px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ],
+                    {
+                        duration: 600,
+                        easing: 'ease-out',
+                        fill: 'forwards'
+                    }
+                )
+            }, 200)
+        }, { amount: 0.3 })
+    })
+</script>

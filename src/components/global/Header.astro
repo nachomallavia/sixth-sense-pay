@@ -11,9 +11,13 @@ interface Props {
 }
 
 const {i18n, currentLocale} = Astro.props
+const currentPath = Astro.url.pathname
+
+// Helper function to check if a link is active
+const isActive = (url: string) => currentPath === url
 ---
 
-<header class="flex justify-center items-center p-4 bg-primary fixed top-0 left-0 right-0 z-50 border-b-1 border-foreground">
+<header class="flex justify-center items-center p-4 bg-primary fixed top-0 left-0 right-0 z-[9999] border-b-1 border-foreground">
     <div class="flex items-center justify-between gap-8 w-full max-w-[1440px]">
         <!-- Logo -->
         <a href={i18n.navigation.home.url}>
@@ -24,10 +28,38 @@ const {i18n, currentLocale} = Astro.props
         <div class="hidden md:flex items-center gap-8">
             <nav>
                 <ul class="flex gap-8 items-center">
-                    <li><a href={i18n.navigation.about.url}>{i18n.navigation.about.title}</a></li>
-                    <li><a href={i18n.navigation.howItWorks.url}>{i18n.navigation.howItWorks.title}</a></li>
-                    <li><a href={i18n.navigation.platforms.url}>{i18n.navigation.platforms.title}</a></li>
-                    <li><a href={i18n.navigation.users.url}>{i18n.navigation.users.title}</a></li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.about.url}
+                            class={isActive(i18n.navigation.about.url) ? "font-bold text-secondary" : ""}
+                        >
+                            {i18n.navigation.about.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.howItWorks.url}
+                            class={isActive(i18n.navigation.howItWorks.url) ? "font-bold text-secondary" : ""}
+                        >
+                            {i18n.navigation.howItWorks.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.platforms.url}
+                            class={isActive(i18n.navigation.platforms.url) ? "font-bold text-secondary" : ""}
+                        >
+                            {i18n.navigation.platforms.title}
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href={i18n.navigation.users.url}
+                            class={isActive(i18n.navigation.users.url) ? "font-bold text-secondary" : ""}
+                        >
+                            {i18n.navigation.users.title}
+                        </a>
+                    </li>
                     <li>
                         <Button href={i18n.navigation.contact.url} variant="primary" size="md" class="bg-neutral-950 hover:bg-neutral-100/20 hover:border-1 hover:border-neutral-100 active:bg-neutral-100/50">
                             {i18n.navigation.contact.title}
@@ -83,7 +115,7 @@ const {i18n, currentLocale} = Astro.props
                     <li>
                         <a 
                             href={i18n.navigation.about.url} 
-                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                            class={`block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors ${isActive(i18n.navigation.about.url) ? "font-bold text-secondary" : ""}`}
                         >
                             {i18n.navigation.about.title}
                         </a>
@@ -91,7 +123,7 @@ const {i18n, currentLocale} = Astro.props
                     <li>
                         <a 
                             href={i18n.navigation.howItWorks.url} 
-                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                            class={`block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors ${isActive(i18n.navigation.howItWorks.url) ? "font-bold text-secondary" : ""}`}
                         >
                             {i18n.navigation.howItWorks.title}
                         </a>
@@ -99,7 +131,7 @@ const {i18n, currentLocale} = Astro.props
                     <li>
                         <a 
                             href={i18n.navigation.platforms.url} 
-                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                            class={`block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors ${isActive(i18n.navigation.platforms.url) ? "font-bold text-secondary" : ""}`}
                         >
                             {i18n.navigation.platforms.title}
                         </a>
@@ -107,7 +139,7 @@ const {i18n, currentLocale} = Astro.props
                     <li>
                         <a 
                             href={i18n.navigation.users.url} 
-                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                            class={`block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors ${isActive(i18n.navigation.users.url) ? "font-bold text-secondary" : ""}`}
                         >
                             {i18n.navigation.users.title}
                         </a>
@@ -115,7 +147,7 @@ const {i18n, currentLocale} = Astro.props
                     <li>
                         <a 
                             href={i18n.navigation.contact.url} 
-                            class="block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors"
+                            class={`block py-4 px-6 text-xl hover:bg-white/10 active:bg-white/20 rounded-lg transition-colors ${isActive(i18n.navigation.contact.url) ? "font-bold text-secondary" : ""}`}
                         >
                             {i18n.navigation.contact.title}
                         </a>
