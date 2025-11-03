@@ -1,6 +1,8 @@
 ---
 import MainLayout from "@/layouts/mainLayout.astro"
 import PlatformsSection1 from "@/components/platforms/PlatformsSection1.astro"
+import PlatformsSection2 from "@/components/platforms/PlatformsSection2.astro"
+import PlatformsSection3 from "@/components/platforms/PlatformsSection3.astro"
 import { actions } from 'astro:actions'
 
 // Get locale from URL parameter
@@ -17,5 +19,7 @@ if (error) {
 
 <MainLayout locale={locale} i18n={i18n}>
     <PlatformsSection1 currentLocale={locale} />
+    <PlatformsSection2 currentLocale={locale} />
+    <PlatformsSection3 currentLocale={locale} />
 </MainLayout>
 

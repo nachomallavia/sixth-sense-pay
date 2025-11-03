@@ -3,19 +3,19 @@ const {currentLocale} = Astro.props
 
 const localesContent = {
     "en":{
-        heading: "Contact Us",
-        description: "Get in touch with our team."
+        heading: "Access the next level<br>in payment processing",
+        description: "Complete the form and our team will contact you to show you how Sixth Sense Pay can transform the payment experience on your platform."
     },
     "es":{
-        heading: "Contáctanos",
-        description: "Ponte en contacto con nuestro equipo."
+        heading: "Accedé al siguiente nivel<br>en procesamiento de pagos",
+        description: "Completá el formulario y nuestro equipo te contactará para mostrarte cómo Sixth Sense Pay puede transformar la experiencia de pagos en tu plataforma."
     }
 }
 
 const content = localesContent[currentLocale as keyof typeof localesContent]
 ---
 
-<section class="container mx-auto px-4 py-16 max-w-[1440px]">
-    <h1 class="text-4xl font-bold mb-6">{content.heading}</h1>
-    <p class="text-lg">{content.description}</p>
+<section class="container mx-auto px-4 pt-16 max-w-[1440px]">
+    <h1 class="text-4xl lg:text-6xl font-bold mb-6 text-center text-secondary" set:html={content.heading}></h1>
+    <p class="text-lg text-center" set:html={content.description}></p>
 </section>

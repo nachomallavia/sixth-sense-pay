@@ -4,6 +4,8 @@ import  vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import dotenv from "dotenv";
 
+import db from "@astrojs/db";
+
 // Carga las variables de .env.local
 dotenv.config();
 
@@ -11,7 +13,7 @@ console.log("REDIS_URL:", process.env.TEST_VAR);
 
 // https://astro.build/config
 export default defineConfig({
-	vite: {
+    vite: {
         plugins: [tailwindcss()],
     },
     output: "server",
@@ -31,7 +33,7 @@ export default defineConfig({
     //       maxRetriesPerRequest: 1
     //     } : {}
     //   },
-    integrations: [],
+    integrations: [db()],
     i18n: {
         locales: ["en", "es"],
         defaultLocale: "en",

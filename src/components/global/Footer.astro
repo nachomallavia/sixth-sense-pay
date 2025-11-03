@@ -4,7 +4,7 @@ import Logo from "@/assets/logo-main-marfil-sobre-negro@2x.png"
 ---
 
 <footer class="bg-foreground text-secondary">
-    <div class="mx-auto px-4 py-8 flex flex-col lg:flex-row gap-6 lg:gap-0 justify-between max-w-[1440px] items-center">
+    <div class="mx-auto px-4 lg:px-0 py-8 flex flex-col lg:flex-row gap-6 lg:gap-0 justify-between w-full max-w-[1440px] items-center">
         <div class="w-full lg:w-auto flex justify-center lg:justify-start">
             <img src={Logo.src} alt="Sixth Sense Pay" class="w-32 h-auto" />
         </div>
@@ -16,7 +16,7 @@ import Logo from "@/assets/logo-main-marfil-sobre-negro@2x.png"
             <a href={i18n.navigation.users.url} class="text-secondary hover:underline">{i18n.navigation.users.title}</a>
             <a href={i18n.navigation.contact.url} class="text-secondary hover:underline">{i18n.navigation.contact.title}</a>
         </div>
-        <div class="flex flex-col lg:flex-col gap-3 lg:gap-4 items-center lg:items-end justify-start text-base lg:text-lg">
+        <div class="flex flex-col lg:flex-col gap-3 lg:gap-4 items-center lg:items-end justify-start text-base lg:text-sm">
             <a href={i18n.footer.navigation.privacyPolicy.url} class="text-secondary underline underline-offset-4 hover:opacity-80">{i18n.footer.navigation.privacyPolicy.title}</a>
             <a href={i18n.footer.navigation.termsOfService.url} class="text-secondary underline underline-offset-4 hover:opacity-80">{i18n.footer.navigation.termsOfService.title}</a>
         </div>

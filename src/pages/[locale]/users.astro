@@ -3,6 +3,9 @@ import MainLayout from "@/layouts/mainLayout.astro"
 import UsersSection1 from "@/components/users/UsersSection1.astro"
 import { actions } from 'astro:actions'
 
+import UsersSection2 from "@/components/users/UsersSection2.astro"
+import UsersSection3 from "@/components/users/UsersSection3.astro"
+
 // Get locale from URL parameter
 const { locale } = Astro.params
 
@@ -17,5 +20,8 @@ if (error) {
 
 <MainLayout locale={locale} i18n={i18n}>
     <UsersSection1 currentLocale={locale} />
+    <UsersSection2 currentLocale={locale} />
+    <UsersSection3 currentLocale={locale} />
+
 </MainLayout>
 

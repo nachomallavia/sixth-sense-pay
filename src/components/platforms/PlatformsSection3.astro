@@ -1,0 +1,86 @@
+---
+const {currentLocale} =    Astro.props
+import PlatformsSection1Image from "@/assets/platforms-section-1.png"
+import HexagonFeatureImage1 from "@/assets/hexagon-api.svg"
+import HexagonFeatureImage2 from "@/assets/hexagon-kyc.svg"
+import HexagonFeatureImage3 from "@/assets/hexagon-real-time.svg"
+import HexagonFeatureImage4 from "@/assets/hexagon-white-label.svg"
+import HexagonFeature from "@/components/global/HexagonFeature.astro"
+import i18nContent from "@/i18n/content.json"
+
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
+const localesContent = {
+    "en":{
+        title: "Key Features",
+        features:[
+            {
+                number: 1,
+                title: "API and SDK integration",
+                description: "Sixth Sense Pay offers a flexible set of APIs and SDKs that allow platforms to integrate our payment infrastructure quickly and easily. With clear documentation and specialized technical support, the implementation adapts to different languages and environments, reducing development times and ensuring a smooth experience for the end user.",
+                image: HexagonFeatureImage1,
+            },
+            {
+                number: 2,
+                title: "KYC and risk levels flows",
+                description: "Our solution includes dynamic KYC flows designed to adapt to the different risk levels of each operation and user. This allows compliance with international regulations efficiently, ensuring security without unnecessary friction in the gaming experience.",
+                image: HexagonFeatureImage2,
+            },
+            {
+                number: 3,
+                title: "Real-time dashboard",
+                description: "Platforms have an intuitive and real-time dashboard where they can monitor balances, transactions, performance metrics, and user flows. This immediate visibility allows for quick decision-making, pattern detection, and optimization of the operation at all times.",
+                image: HexagonFeatureImage3,
+            },
+            {
+                number: 4,
+                title: "White-label options",
+                description: "Sixth Sense Pay also offers white-label solutions, allowing platforms to customize the wallet with their own visual identity. This way, the brand experience is maintained in front of the user, while leveraging the robustness and regulatory compliance of our infrastructure.",
+                image: HexagonFeatureImage4,
+            },
+        ]
+    },
+    "es":{
+        title: "Características",
+        
+        features: [
+            {
+                number: 1,
+                title: "APIs y SDKs de integración",
+                description:"Sixth Sense Pay ofrece un set de APIs y SDKs flexibles que permiten a las plataformas integrar nuestra infraestructura de pagos de manera rápida y sencilla. Con documentación clara y soporte técnico especializado, la implementación se adapta a distintos lenguajes y entornos, reduciendo tiempos de desarrollo y asegurando una experiencia fluida para el usuario final.",
+                image: HexagonFeatureImage1,
+            },
+            {
+                number: 2,
+                title: "Flujos de KYC y niveles de riesgo",
+                description: "Nuestra solución incorpora flujos de KYC dinámicos, diseñados para ajustarse a los diferentes niveles de riesgo de cada operación y usuario. Esto permite cumplir con las regulaciones internacionales de manera eficiente, garantizando seguridad sin fricciones innecesarias en la experiencia de juego.",
+                image: HexagonFeatureImage2,
+            },
+            {
+                number: 3,
+                title: "Panel de control en tiempo real",
+                description: "Las plataformas cuentan con un dashboard intuitivo y en tiempo real, donde pueden monitorear saldos, transacciones, métricas de desempeño y flujos de usuarios. Esta visibilidad inmediata permite tomar decisiones rápidas, detectar patrones y optimizar la operación en todo momento.",
+                image: HexagonFeatureImage3,
+            },
+            {
+                number: 4,
+                title: "Opciones white-label (marca blanca)",
+                description: "Sixth Sense Pay también ofrece la posibilidad de soluciones white-label, para que las plataformas puedan personalizar la billetera con su propia identidad visual. De esta forma, se mantiene la experiencia de marca frente al usuario, mientras se aprovecha la robustez y el cumplimiento regulatorio de nuestra infraestructura.",
+                image: HexagonFeatureImage4,
+            },
+        ]
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+
+<section id="platforms-section-2" class="mx-auto px-4 py-20  w-full h-full bg-secondary">
+    <h2 class="text-4xl font-bold mb-20 text-center" set:html={content.title}></h2>
+    <div class="flex flex-col gap-40 items-center justify-center w-full max-w-[1440px] mx-auto">
+        {content.features.map((feature) => (
+            <HexagonFeature number={feature.number} title={feature.title} description={feature.description} image={feature.image} />
+        ))} 
+    </div>
+    </div>
+</section>
+

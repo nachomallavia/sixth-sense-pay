@@ -1,5 +1,6 @@
 import { defineAction } from 'astro:actions';
 import type { Astro } from 'astro';
+import { db, ContactFormSubmission } from 'astro:db';
 import { z } from 'astro:schema';
 import i18nContent from "@/i18n/content.json"
 export const server = {
@@ -28,5 +29,26 @@ export const server = {
 
 
     },
+  }),
+  // Basic contact form action
+  sendContactForm: defineAction({
+    accept:'form',
+    input: z.object({
+      name: z.string(),
+      email: z.string(),
+      message: z.string().optional(),
+    }),
+    handler: async ( input, context ) => {
+      console.log('sending contact form', input)
+      try {
+        const insert = await db.insert(ContactFormSubmission).values(input).returning();
+        
+        console.log('insert', insert)
+        return { success: true, data: insert }
+      } catch (error) {
+        console.error('error inserting contact form submission', error)
+        return { success: false, error: error }
+      }
+    }
   }),
 }

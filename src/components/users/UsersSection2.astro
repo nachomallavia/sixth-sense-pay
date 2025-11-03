@@ -1,0 +1,67 @@
+---
+const {currentLocale} = Astro.props
+import Card from "@/components/global/Card.astro"
+import CardImage1 from "@/assets/how-it-works-card-4.png"
+import CardImage2 from "@/assets/how-it-works-card-1.png"
+import CardImage3 from "@/assets/how-it-works-card-3.png"
+const localesContent = {
+    "en":{
+        heading: "What can you do with Sixth Sense Pay?",
+        
+        features: [
+            {
+                number: 1,
+                title: "Buy tokens with fiat or crypto",
+                image: CardImage1,
+
+            },
+            {
+                number: 2,
+                title: "Manage balances",
+                image: CardImage2,
+            },
+            {
+                number: 3,
+                title: "Withdraw winnings quickly",
+                image: CardImage3,
+            },
+        ]
+    },
+    "es":{
+        heading: "¿Qué se puede hacer con Sixth Sense Pay?",
+
+        features: [
+            {
+                number: 1,
+                title: "Comprar tokens con fiat o crypto",
+                image: CardImage1,
+            },
+            {
+                number: 2,
+                title: "Administrar saldos",
+                image: CardImage2,
+            },
+            {
+                number: 3,
+                title: "Retirar ganancias rápidamente",
+                image: CardImage3,
+            },
+            
+        ]
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+
+<section class="mx-auto py-16  w-full h-full bg-secondary">
+    <div class="flex flex-col w-full mx-auto items-center justify-center">
+    <h2 class="text-4xl font-bold mb-6">{content.heading}</h2>
+
+</div>    </div>
+    <div class="flex flex-col lg:flex-row px-4 gap-8 items-center justify-center w-full max-w-[1440px] mx-auto mt-16">
+        {content.features.map((feature) => (
+            <Card number={feature.number} title={feature.title}  image={feature.image ?? undefined} />
+        ))}
+    </div>
+</section>

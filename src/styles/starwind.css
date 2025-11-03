@@ -122,6 +122,7 @@
 
 	* {
 		@apply border-border;
+		font-family:'Archivo', sans-serif;
 	}
 	html {
 		@apply bg-background text-foreground scheme-light dark:scheme-dark;

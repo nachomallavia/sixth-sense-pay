@@ -1,0 +1,250 @@
+---
+const {currentLocale} = Astro.props
+import { Button } from '@/components/starwind/button'
+
+const localesContent = {
+    "en":{
+        thanksMessage: "Thank you for reaching out to us, ",
+        thanksMessage2: "We will be writing to you soon at your email address: ",
+        errorMessage: "Failed to send message. Please try again.",
+        modalCloseButton: "Close",
+        formFields:{
+            name: {
+                label: "Name",
+                placeholder: "Enter your name",
+                type: "text",
+                required: true,
+            },
+            email: {
+                label: "Email",
+                placeholder: "Enter your email",
+                type: "email",
+                required: true,
+            },
+            message: {
+                label: "Message",
+                placeholder: "Enter your message",
+                type: "textarea",
+                required: false,
+                resize: "vertical",
+            },
+        },
+        formButtonText: "Request contact",
+        formSuccessMessage: "Request sent successfully",
+        formErrorMessage: "Failed to send request",
+        tooltipText: "Please fill in both name and email fields",
+    },
+    "es":{
+        thanksMessage: "¡Gracias por contactarnos, ",
+        thanksMessage2: "Nos pondremos en contacto contigo pronto a tu email: ",
+        errorMessage: "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+        modalCloseButton: "Cerrar",
+        formFields:{
+            name: {
+                label: "Nombre",
+                placeholder: "Ingresá tu nombre",
+                type: "text",
+                required: true,
+            },
+            email: {
+                label: "Email",
+                placeholder: "Ingresá tu email",
+                type: "email",
+                required: true,
+            },
+            message: {
+                label: "Mensaje",
+                placeholder: "Ingresá tu mensaje",
+                type: "textarea",
+                resize: "vertical",
+                required: false,
+            },
+        },
+        formButtonText: "Solicitar contacto",
+        formSuccessMessage: "Solicitud enviada correctamente",
+        formErrorMessage: "Error al enviar la solicitud",
+        tooltipText: "Por favor, completa los campos de nombre y correo electrónico",
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+
+---
+
+<section class="container mx-auto px-4 py-16 max-w-[600px]">
+    <!-- Success Modal (hidden by default) -->
+    <div id="success-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-foreground/80 backdrop-blur-sm" id="modal-backdrop"></div>
+        
+        <!-- Modal Card -->
+        <div class="relative bg-secondary rounded-lg shadow-2xl max-w-md w-full p-8 z-10">
+            <!-- Close Button -->
+            <button 
+                id="modal-close" 
+                class="absolute top-4 right-4 text-foreground hover:text-foreground/70 transition-colors"
+                aria-label="Close modal"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Modal Content -->
+            <div class="text-center space-y-4">
+                <div class="mx-auto w-16 h-16 bg-none border-2 border-primary rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h2 class="text-4xl font-bold text-primary"><span id="modal-message-1">{content.thanksMessage}</span><span id="modal-user-name"></span>!</h2>
+                <p class="text-foreground text-2xl" id="modal-message-2">{content.thanksMessage2}</p>
+                <p class="text-primary text-2xl font-medium" id="modal-user-email"></p>
+            </div>
+        </div>
+    </div>
+    
+    <form id="contact-form" class="flex flex-col gap-4">
+        {Object.entries(content.formFields).map(([key, field]) => (
+            <div class="flex flex-col gap-2 w-full max-w-[600px] mx-auto">
+                <label for={key} class="text-sm font-medium text-foreground">{field.label}{field.required ? '*' : ''}</label>
+                {field.type === 'textarea' ? (
+                    <textarea 
+                        name={key} 
+                        placeholder={field.placeholder} 
+                        required={field.required}
+                        style={`resize: ${'resize' in field ? field.resize : 'vertical'}`}
+                        class="w-full p-2 border-none border-b-2 bg-primary placeholder:text-foreground/50 min-h-[100px]"
+                    ></textarea>
+                ) : (
+                    <input 
+                        type={field.type as 'text' | 'email'} 
+                        name={key} 
+                        placeholder={field.placeholder} 
+                        required={field.required}
+                        class="w-full p-2 border-none border-b-2 bg-primary placeholder:text-foreground/50" 
+                    />
+                )}
+                <div class="h-px w-full bg-foreground"></div>
+            </div>
+        ))}
+        <div class="relative self-end max-w-[200px] w-full" id="button-wrapper">
+            <Button type="submit" id="submit-button" disabled data-tooltip={content.tooltipText} class="w-full bg-neutral-950 hover:bg-neutral-100/20 hover:border hover:border-neutral-100 active:bg-neutral-100/50 disabled:opacity-65 disabled:cursor-not-allowed">{content.formButtonText}</Button>
+            <div id="tooltip" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 text-sm text-white bg-neutral-800 rounded-md whitespace-nowrap z-50">
+                {content.tooltipText}
+                <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-neutral-800"></div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<script>
+    import { actions } from 'astro:actions';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contact-form') as HTMLFormElement;
+        const buttonWrapper = document.getElementById('button-wrapper');
+        const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
+        const tooltip = document.getElementById('tooltip') as HTMLDivElement;
+        const nameInput = form?.querySelector('input[name="name"]') as HTMLInputElement;
+        const emailInput = form?.querySelector('input[name="email"]') as HTMLInputElement;
+        const messageInput = form?.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+
+        // Modal elements
+        const modal = document.getElementById('success-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalUserName = document.getElementById('modal-user-name');
+        const modalUserEmail = document.getElementById('modal-user-email');
+
+        function updateButtonState() {
+            if (submitButton && nameInput && emailInput) {
+                const isValid = nameInput.value.trim() !== '' && emailInput.value.trim() !== '';
+                submitButton.disabled = !isValid;
+            }
+        }
+
+        function showModal(name: string, email: string) {
+            if (modal && modalUserName && modalUserEmail) {
+                modalUserName.textContent = name;
+                modalUserEmail.textContent = email;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function clearForm() {
+            if (form) {
+                form.reset();
+                updateButtonState();
+            }
+        }
+
+        // Handle form submission
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const name = formData.get('name') as string;
+            const email = formData.get('email') as string;
+            const message = (formData.get('message') as string) || '';
+
+            try {
+                // Disable submit button during submission
+                if (submitButton) submitButton.disabled = true;
+
+                const { data, error } = await actions.sendContactForm(formData);
+
+                if (error || !data?.success) {
+                    console.error('Error submitting form:', error);
+                    alert('Failed to send message. Please try again.');
+                } else {
+                    // Show success modal
+                    showModal(name, email);
+                    // Clear form
+                    clearForm();
+                }
+            } catch (err) {
+                console.error('Error submitting form:', err);
+                alert('Failed to send message. Please try again.');
+            } finally {
+                // Re-enable submit button
+                if (submitButton) updateButtonState();
+            }
+        });
+
+        // Close modal on close button click
+        modalClose?.addEventListener('click', closeModal);
+
+        // Close modal on backdrop click
+        modalBackdrop?.addEventListener('click', closeModal);
+
+        // Show tooltip on hover when button is disabled
+        buttonWrapper?.addEventListener('mouseenter', () => {
+            if (submitButton?.disabled && tooltip) {
+                tooltip.classList.remove('hidden');
+            }
+        });
+
+        // Hide tooltip on mouse leave
+        buttonWrapper?.addEventListener('mouseleave', () => {
+            if (tooltip) {
+                tooltip.classList.add('hidden');
+            }
+        });
+
+        // Check on input change
+        nameInput?.addEventListener('input', updateButtonState);
+        emailInput?.addEventListener('input', updateButtonState);
+
+        // Initial check
+        updateButtonState();
+    });
+</script>
