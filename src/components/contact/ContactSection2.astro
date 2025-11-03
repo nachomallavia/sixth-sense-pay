@@ -1,7 +1,7 @@
 ---
 const {currentLocale} = Astro.props
 import { Button } from '@/components/starwind/button'
-
+import SixthSenseLogo from "@/assets/logo-main-1color-fondo-claro@2x.png"
 const localesContent = {
     "en":{
         thanksMessage: "Thank you for reaching out to us, ",
@@ -100,6 +100,7 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
                 <h2 class="text-4xl font-bold text-primary"><span id="modal-message-1">{content.thanksMessage}</span><span id="modal-user-name"></span>!</h2>
                 <p class="text-foreground text-2xl" id="modal-message-2">{content.thanksMessage2}</p>
                 <p class="text-primary text-2xl font-medium" id="modal-user-email"></p>
+                <img src={SixthSenseLogo.src} alt="Sixth Sense Pay" class="w-1/2 mx-auto">
             </div>
         </div>
     </div>
