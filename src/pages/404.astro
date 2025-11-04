@@ -1,0 +1,66 @@
+---
+import MainLayout from "@/layouts/mainLayout.astro"
+import NotFoundImage from "@/assets/404.png"
+import { actions } from 'astro:actions'
+
+// Detect locale from URL path
+const pathname = Astro.url.pathname
+let locale = 'en'
+
+// Check if URL starts with /es or /en
+if (pathname.startsWith('/es')) {
+    locale = 'es'
+} else if (pathname.startsWith('/en')) {
+    locale = 'en'
+}
+
+// Load content for the locale
+const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale: locale })
+const i18n = data?.i18n
+
+if (error) {
+    console.error('Error loading content:', error)
+}
+
+// Get 404-specific content
+const notFoundContent = i18n?.notFound || {
+    title: "404 - Page Not Found",
+    message: "We couldn't find the page you were looking for.",
+    button: "Go Home"
+}
+
+// Determine home URL based on locale
+const homeUrl = locale === 'es' ? '/es/' : '/en/'
+---
+
+<MainLayout locale={locale} i18n={i18n}>
+    <div class="min-h-[70vh] flex items-center justify-center bg-secondary px-4 py-16">
+        <div class="max-w-2xl mx-auto text-center">
+            <!-- 404 Image -->
+            <div class="mb-8 flex justify-center">
+                <img 
+                    src={NotFoundImage.src} 
+                    alt="404 Not Found" 
+                    class="max-w-full h-auto w-full max-w-md"
+                />
+            </div>
+            
+            <!-- Error Message -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                404
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-8">
+                {notFoundContent.message}
+            </p>
+            
+            <!-- Home Button -->
+            <a 
+                href={homeUrl}
+                class="inline-block px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+                {notFoundContent.button}
+            </a>
+        </div>
+    </div>
+</MainLayout>
+

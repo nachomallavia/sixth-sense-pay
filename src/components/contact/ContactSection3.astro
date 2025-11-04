@@ -1,0 +1,27 @@
+---
+const {currentLocale} = Astro.props
+const localesContent = {
+    "en":{
+        title: "You can also book a call with our team",
+        description: "Select a date and time that works for you and schedule a call with our team.",
+    },
+    "es":{
+        title: "También puedes agendar una llamada con nuestro equipo",
+        description: "Seleccioná una fecha y hora que te funcione y agendá una llamada con nuestro equipo.",
+    },
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+
+---
+
+<section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-secondary mb-6" set:html={content.title}></h2>
+    <p class="text-lg text-center" set:html={content.description}></p>
+   <!-- Calendly inline widget begin -->
+<div class="calendly-inline-widget" data-url="https://calendly.com/nachomallavia/30min?&hide_gdpr_banner=1&background_color=fafafa&text_color=0a0a0a&primary_color=ff3a00" style="min-width:320px;height:700px;"></div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- Calendly inline widget end -->
+</section>
+
+

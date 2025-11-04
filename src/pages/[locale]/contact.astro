@@ -2,6 +2,8 @@
 import MainLayout from "@/layouts/mainLayout.astro"
 import ContactSection1 from "@/components/contact/ContactSection1.astro"
 import ContactSection2 from "@/components/contact/ContactSection2.astro"
+import ContactSection3 from "@/components/contact/ContactSection3.astro"
+
 import { actions } from 'astro:actions'
 
 // Get locale from URL parameter
@@ -20,6 +22,7 @@ if (error) {
     <div class="bg-primary min-h-screen">
          <ContactSection1 currentLocale={locale} />
          <ContactSection2 currentLocale={locale} />
+         <ContactSection3 currentLocale={locale} />
     </div>
 </MainLayout>
 

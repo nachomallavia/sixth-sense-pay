@@ -45,6 +45,11 @@
                 "title": "Contact",
                 "url": "/en/contact"
             }
+        },
+        "notFound": {
+            "title": "404 - Page Not Found",
+            "message": "We couldn't find the page you were looking for.",
+            "button": "Go Home"
         }
     },
     "es": {
@@ -93,6 +98,11 @@
                 "title": "Contacto",
                 "url": "/es/contact"
             }
+        },
+        "notFound": {
+            "title": "404 - Página No Encontrada",
+            "message": "No pudimos encontrar la página que buscabas.",
+            "button": "Ir al Inicio"
         }
     }
 }

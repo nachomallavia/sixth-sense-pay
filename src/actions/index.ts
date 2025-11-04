@@ -2,7 +2,11 @@ import { defineAction } from 'astro:actions';
 import type { Astro } from 'astro';
 import { db, ContactFormSubmission } from 'astro:db';
 import { z } from 'astro:schema';
+import { Resend } from 'resend';
 import i18nContent from "@/i18n/content.json"
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export const server = {
   getLocaleContent: defineAction({
     input: z.object({locale: z.string()}),
@@ -35,14 +39,21 @@ export const server = {
     accept:'form',
     input: z.object({
       name: z.string(),
-      email: z.string(),
+      email: z.string().email(),
       message: z.string().optional(),
     }),
     handler: async ( input, context ) => {
       console.log('sending contact form', input)
       try {
         const insert = await db.insert(ContactFormSubmission).values(input).returning();
-        
+        if (insert) {
+          const email = await resend.emails.send({
+            from: 'dev@blockspage.com',
+            to: 'nachomallavia@gmail.com',
+            subject: 'Contact Form Submission',
+            html: `<p>New contact form submission: ${input.name} - ${input.email} - ${input.message}</p>`,
+          })
+        }
         console.log('insert', insert)
         return { success: true, data: insert }
       } catch (error) {
