@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 
 import db from "@astrojs/db";
 
+import react from "@astrojs/react";
+
 // Carga las variables de .env.local
 dotenv.config();
 
@@ -33,7 +35,7 @@ export default defineConfig({
     //       maxRetriesPerRequest: 1
     //     } : {}
     //   },
-    integrations: [db()],
+    integrations: [db(), react()],
     i18n: {
         locales: ["en", "es"],
         defaultLocale: "en",

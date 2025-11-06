@@ -129,6 +129,7 @@ const content = localesContent[currentLocale as keyof typeof localesContent]
                 <div class="h-px w-full bg-foreground"></div>
             </div>
         ))}
+        <input type="hidden" name="locale" value={currentLocale}>
         <div class="relative self-end max-w-[200px] w-full" id="button-wrapper">
             <Button type="submit" id="submit-button" disabled data-tooltip={content.tooltipText} class="w-full bg-neutral-950 hover:bg-neutral-100/20 hover:border hover:border-neutral-100 active:bg-neutral-100/50 disabled:opacity-65 disabled:cursor-not-allowed">{content.formButtonText}</Button>
             <div id="tooltip" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 text-sm text-white bg-neutral-800 rounded-md whitespace-nowrap z-50">

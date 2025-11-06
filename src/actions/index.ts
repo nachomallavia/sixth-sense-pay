@@ -4,8 +4,23 @@ import { db, ContactFormSubmission } from 'astro:db';
 import { z } from 'astro:schema';
 import { Resend } from 'resend';
 import i18nContent from "@/i18n/content.json"
-
+import { FormSubmitEmail } from "@/emails/formSubmitEmail";
+import { FormSubmitThankYouEmail } from "@/emails/formSubmitThankYouEmail";
+import { render } from "@react-email/components";
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const localesContent = {
+  "en":{
+    thankYouEmailSubject: 'Thank you for your message',
+    thankYouEmailText: 'We received your message and will be in touch with you soon.',
+    contactFormSubmissionSubject: 'Contact Form Submission',
+  },
+  "es":{
+    thankYouEmailSubject: 'Gracias por tu mensaje',
+    thankYouEmailText: 'Recibimos tu mensaje y nos pondremos en contacto contigo pronto.',
+    contactFormSubmissionSubject: 'Nuevo ingreso de formulario de contacto',
+  }
+}
 
 export const server = {
   getLocaleContent: defineAction({
@@ -41,17 +56,55 @@ export const server = {
       name: z.string(),
       email: z.string().email(),
       message: z.string().optional(),
+      locale: z.string(),
     }),
     handler: async ( input, context ) => {
+      const content = localesContent[input.locale as keyof typeof localesContent]
       console.log('sending contact form', input)
+      const thankYouEmailHtml = await render(FormSubmitThankYouEmail({
+        url: 'https://www.6sense.com',
+        name: input.name,
+        email: input.email,
+        message: input.message || '',
+        locale: input.locale,
+      }))
+      const thankYouEmailText = await render(FormSubmitThankYouEmail({
+        url: 'https://www.6sense.com',
+        name: input.name,
+        email: input.email,
+        message: input.message || '',
+        locale: input.locale,
+      }),{plainText: true})
+      const emailHtml = await render(FormSubmitEmail({
+        url: 'https://www.6sense.com',
+        name: input.name,
+        email: input.email,
+        message: input.message || '',
+        locale: input.locale,
+      }))
+      const emailText = await render(FormSubmitEmail({
+        url: 'https://www.6sense.com',
+        name: input.name,
+        email: input.email,
+        message: input.message || '',
+        locale: input.locale,
+      }),{plainText: true})
       try {
         const insert = await db.insert(ContactFormSubmission).values(input).returning();
         if (insert) {
           const email = await resend.emails.send({
             from: 'dev@blockspage.com',
             to: 'nachomallavia@gmail.com',
-            subject: 'Contact Form Submission',
-            html: `<p>New contact form submission: ${input.name} - ${input.email} - ${input.message}</p>`,
+            subject: content.contactFormSubmissionSubject,
+            html: emailHtml,
+            text: emailText,
+          })
+          const thankYouEmail = await resend.emails.send({
+            from: 'dev@blockspage.com',
+            to: input.email,
+            subject: content.thankYouEmailSubject,
+            html: thankYouEmailHtml,
+            text: thankYouEmailText,
           })
         }
         console.log('insert', insert)

@@ -5,7 +5,8 @@ export const ContactFormSubmission = defineTable({
   columns:{
     name: column.text(),
     email: column.text(),
-    message: column.text({nullable: true}),
+    message: column.text({optional: true}),
+    locale: column.text(),
   }
 
 

@@ -1,0 +1,63 @@
+---
+const {currentLocale} =    Astro.props
+import PlatformsSection1Image from "@/assets/platforms-section-1.png"
+import HexagonFeatureImage1 from "@/assets/hexagon-tokens.svg"
+import HexagonFeatureImage2 from "@/assets/hexagon-security.svg"
+
+import HexagonFeature from "@/components/global/HexagonFeature.astro"
+import i18nContent from "@/i18n/content.json"
+
+const i18n = i18nContent[currentLocale as keyof typeof i18nContent]
+const localesContent = {
+    "en":{
+        title: "Key Features",
+        features:[
+            {
+                number: 1,
+                title: "Supported networks and currencies",
+                description: "Sixth Sense Pay offers support for major blockchain networks (ERC-20 and TRC-20), as well as stable digital currencies like USDT and USDC. This expands user options and ensures a versatile and reliable experience.",
+                image: HexagonFeatureImage1,
+            },
+            {
+                number: 2,
+                title: "Security measures",
+                description: "Security is a central pillar of Sixth Sense Pay. We implement regulatory compliance protocols, data encryption, and constant validations to protect each transaction and ensure a reliable environment for players and platforms.",
+                image: HexagonFeatureImage2,
+            },
+           
+        ]
+    },
+    "es":{
+        title: "Características",
+        
+        features: [
+            {
+                number: 1,
+                title: "Redes y monedas soportadas",
+                description:"Sixth Sense Pay ofrece soporte para las principales redes blockchain (ERC-20 y TRC-20), así como para monedas digitales estables como USDT y USDC. Esto amplía las opciones de los usuarios y asegura una experiencia versátil y confiable.",
+                image: HexagonFeatureImage1,
+            },
+            {
+                number: 2,
+                title: "Medidas de seguridad",
+                description: "La seguridad es un pilar central de Sixth Sense Pay. Implementamos protocolos de cumplimiento regulatorio, encriptación de datos y validaciones constantes, para proteger cada transacción y garantizar un entorno confiable para jugadores y plataformas.",
+                image: HexagonFeatureImage2,
+            },
+            
+        ]
+    }
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent]
+---
+
+<section id="platforms-section-2" class="mx-auto px-4 py-20  w-full h-full bg-secondary">
+    <h2 class="text-4xl font-bold mb-20 text-center" set:html={content.title}></h2>
+    <div class="flex flex-col gap-40 items-center justify-center w-full max-w-[1440px] mx-auto">
+        {content.features.map((feature) => (
+            <HexagonFeature number={feature.number} title={feature.title} description={feature.description} image={feature.image} />
+        ))} 
+    </div>
+    </div>
+</section>
+
