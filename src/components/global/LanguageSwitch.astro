@@ -48,14 +48,12 @@ const languages = [
 </style>
 
 <script>
-    import { actions } from 'astro:actions'
-    
     // Use class selector to get all language selects
     const languageSelects = document.querySelectorAll('.language-select') as NodeListOf<HTMLSelectElement>
     
     // Add event listener to each select
     languageSelects.forEach(select => {
-        select.addEventListener('change', async (event) => {
+        select.addEventListener('change', (event) => {
             const newLocale = (event.target as HTMLSelectElement).value
             const currentPath = window.location.pathname
             
@@ -75,17 +73,7 @@ const languages = [
                 newPath = currentPath
             }
             
-            // Update session storage
-            try {
-                const { data, error } = await actions.setLocale(newLocale)
-                if (error) {
-                    console.error('Error setting locale:', error)
-                }
-            } catch (error) {
-                console.error('Error in setLocale action:', error)
-            }
-            
-            // Navigate to new URL (single navigation)
+            // Navigate to new URL
             window.location.href = newPath
         })
     })
