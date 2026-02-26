@@ -10,7 +10,8 @@
                     "title": "Terms of Service",
                     "url": "/en/terms-of-service"
                 }
-            }
+            },
+            "disclaimer": "The Republika Srpska, the Commission and other public sector bodies do not guarantee the value of virtual currencies and are not responsible for any possible damage and losses that users and other holders of virtual currencies or persons who provide services related to virtual currencies, i.e. third parties, suffer in connection with conducting transactions with virtual currencies."
         },
         "seo": {
             "title": "Sixth Sense Pay - Smart Payment Solutions",
@@ -63,7 +64,8 @@
                     "title": "Términos y Condiciones",
                     "url": "/es/terms-of-service"
                 }
-            }
+            },
+            "disclaimer": "La República Srpska, la Comisión y otros organismos del sector público no garantizan el valor de las monedas virtuales y no son responsables de los posibles daños y pérdidas que sufran los usuarios y otros titulares de monedas virtuales o las personas que presten servicios relacionados con monedas virtuales, es decir, terceros, en relación con la realización de transacciones con monedas virtuales."
         },
         "seo": {
             "title": "Sixth Sense Pay - Soluciones de Pago Inteligentes",
