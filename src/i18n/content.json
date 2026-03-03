@@ -106,5 +106,167 @@
             "message": "No pudimos encontrar la página que buscabas.",
             "button": "Ir al Inicio"
         }
+    },
+    "hr": {
+        "footer": {
+            "navigation": {
+                "privacyPolicy": {
+                    "title": "Pravila privatnosti",
+                    "url": "/hr/privacy-policy"
+                },
+                "termsOfService": {
+                    "title": "Uvjeti korištenja",
+                    "url": "/hr/terms-of-service"
+                }
+            },
+            "disclaimer": "Republika Srpska, Komisija i druga tijela javnog sektora ne jamče za vrijednost virtualnih valuta i ne snose odgovornost za eventualnu štetu i gubitke koje korisnici i drugi imatelji virtualnih valuta ili osobe koje pružaju usluge povezane s virtualnim valutama, odnosno treće strane, pretrpe u vezi s obavljanjem transakcija s virtualnim valutama."
+        },
+        "seo": {
+            "title": "Sixth Sense Pay - Pametna Platna Rješenja",
+            "description": "Revolucioniramo plaćanja tehnologijom šestog osjetila"
+        },
+        "home": {
+            "title": "Početna",
+            "url": "/hr/"
+        },
+        "navigation": {
+            "home": {
+                "title": "Početna",
+                "url": "/hr/"
+            },
+            "about": {
+                "title": "O nama",
+                "url": "/hr/about-us"
+            },
+            "howItWorks": {
+                "title": "Kako funkcionira",
+                "url": "/hr/how-it-works"
+            },
+            "platforms": {
+                "title": "Platforme",
+                "url": "/hr/platforms"
+            },
+            "users": {
+                "title": "Korisnici",
+                "url": "/hr/users"
+            },
+            "contact": {
+                "title": "Kontakt",
+                "url": "/hr/contact"
+            }
+        },
+        "notFound": {
+            "title": "404 - Stranica nije pronađena",
+            "message": "Stranica koju tražite nije pronađena.",
+            "button": "Na početnu"
+        }
+    },
+    "bs": {
+        "footer": {
+            "navigation": {
+                "privacyPolicy": {
+                    "title": "Politika privatnosti",
+                    "url": "/bs/privacy-policy"
+                },
+                "termsOfService": {
+                    "title": "Uvjeti korištenja",
+                    "url": "/bs/terms-of-service"
+                }
+            },
+            "disclaimer": "Republika Srpska, Komisija i drugi organ javnog sektora ne garantuju za vrijednost virtuelnih valuta i ne snose odgovornost za bilo koju eventualnu štetu i gubitke koje korisnici i drugi imaoci virtuelnih valuta ili lica koja pružaju usluge povezane sa virtuelnim valutama, odnosno treća lica, pretrpe."
+        },
+        "seo": {
+            "title": "Sixth Sense Pay - Pametna Platna Rješenja",
+            "description": "Revolucioniramo plaćanja tehnologijom šestog čula"
+        },
+        "home": {
+            "title": "Početna",
+            "url": "/bs/"
+        },
+        "navigation": {
+            "home": {
+                "title": "Početna",
+                "url": "/bs/"
+            },
+            "about": {
+                "title": "O nama",
+                "url": "/bs/about-us"
+            },
+            "howItWorks": {
+                "title": "Kako funkcioniše",
+                "url": "/bs/how-it-works"
+            },
+            "platforms": {
+                "title": "Platforme",
+                "url": "/bs/platforms"
+            },
+            "users": {
+                "title": "Korisnici",
+                "url": "/bs/users"
+            },
+            "contact": {
+                "title": "Kontakt",
+                "url": "/bs/contact"
+            }
+        },
+        "notFound": {
+            "title": "404 - Stranica nije pronađena",
+            "message": "Stranica koju tražite nije pronađena.",
+            "button": "Na početnu"
+        }
+    },
+    "sr": {
+        "footer": {
+            "navigation": {
+                "privacyPolicy": {
+                    "title": "Politika privatnosti",
+                    "url": "/sr/privacy-policy"
+                },
+                "termsOfService": {
+                    "title": "Uslovi korišćenja",
+                    "url": "/sr/terms-of-service"
+                }
+            },
+            "disclaimer": "Republika Srpska, Komisija i drugi organ javnog sektora ne garantuju za vrednost virtuelnih valuta i ne snose odgovornost za bilo kakvu eventualnu štetu i gubitke koje korisnici i drugi imaoci virtuelnih valuta ili lica koja pružaju usluge povezane sa virtuelnim valutama, odnosno treća lica, pretrpe."
+        },
+        "seo": {
+            "title": "Sixth Sense Pay - Pametna Platna Rešenja",
+            "description": "Revolucionišemo plaćanja tehnologijom šestog čula"
+        },
+        "home": {
+            "title": "Početna",
+            "url": "/sr/"
+        },
+        "navigation": {
+            "home": {
+                "title": "Početna",
+                "url": "/sr/"
+            },
+            "about": {
+                "title": "O nama",
+                "url": "/sr/about-us"
+            },
+            "howItWorks": {
+                "title": "Kako funkcioniše",
+                "url": "/sr/how-it-works"
+            },
+            "platforms": {
+                "title": "Platforme",
+                "url": "/sr/platforms"
+            },
+            "users": {
+                "title": "Korisnici",
+                "url": "/sr/users"
+            },
+            "contact": {
+                "title": "Kontakt",
+                "url": "/sr/contact"
+            }
+        },
+        "notFound": {
+            "title": "404 - Stranica nije pronađena",
+            "message": "Stranica koju tražite nije pronađena.",
+            "button": "Na početnu"
+        }
     }
 }

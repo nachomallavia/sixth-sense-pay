@@ -6,7 +6,7 @@ export const onRequest = defineMiddleware((context, next) => {
     
     // Only validate routes with [locale] parameter
     if (locale) {
-        const validLocales = ["en", "es"];
+        const validLocales = ["en", "es", "hr", "bs", "sr"];
         
         if (!validLocales.includes(locale)) {
             // Redirect invalid locales to 404

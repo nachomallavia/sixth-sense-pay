@@ -21,7 +21,7 @@ export default defineConfig({
     adapter: vercel(),
     integrations: [db(), react()],
     i18n: {
-        locales: ["en", "es"],
+        locales: ["en", "es", "hr", "bs", "sr"],
         defaultLocale: "en",
         routing: {
             prefixDefaultLocale: false,

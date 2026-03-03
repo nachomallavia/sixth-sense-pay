@@ -12,6 +12,9 @@ const selectId = `${idPrefix}language`
 const languages = [
     { value: "en", label: "Eng" },
     { value: "es", label: "Esp" },
+    { value: "hr", label: "Hrv" },
+    { value: "bs", label: "Bos" },
+    { value: "sr", label: "Srp" },
 ]
 ---
 <div class="flex flex-row items-center justify-center gap-2 language-select-group">
@@ -60,18 +63,10 @@ const languages = [
             // Calculate new URL based on locale
             let newPath: string
             
-            // Remove any existing locale prefix (/en/ or /es/)
-            const pathWithoutLocale = currentPath.replace(/^\/(en|es)(\/|$)/, '/')
-            
-            if (newLocale === 'en') {
-                // Add /en/ prefix
-                newPath = pathWithoutLocale === '/' ? '/en/' : `/en${pathWithoutLocale}`
-            } else if (newLocale === 'es') {
-                // Add /es/ prefix
-                newPath = pathWithoutLocale === '/' ? '/es/' : `/es${pathWithoutLocale}`
-            } else {
-                newPath = currentPath
-            }
+            // Remove any existing locale prefix
+            const pathWithoutLocale = currentPath.replace(/^\/(en|es|hr|bs|sr)(\/|$)/, '/')
+
+            newPath = pathWithoutLocale === '/' ? `/${newLocale}/` : `/${newLocale}${pathWithoutLocale}`
             
             // Navigate to new URL
             window.location.href = newPath
