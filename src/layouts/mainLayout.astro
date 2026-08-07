@@ -7,9 +7,12 @@ import Footer from "@/components/global/Footer.astro"
 interface Props {
     locale: string | undefined
     i18n: any | undefined
+    title?: string
+    description?: string
 }
 
-const { locale, i18n } = Astro.props
+const { locale, i18n, title, description } = Astro.props
+const currentLocale = locale || "en"
 
 // Generate alternate URLs for SEO
 const currentPath = Astro.url.pathname
@@ -22,12 +25,12 @@ const alternateUrls = {
     es: `/es${pathWithoutLocale}`
 }
 
-// Page title and description from i18n or defaults
-const pageTitle = i18n?.seo?.title || "Sixth Sense Pay"
-const pageDescription = i18n?.seo?.description || "Sixth Sense Pay - Payment Solutions"
+// Page title and description: page overrides, then i18n, then defaults
+const pageTitle = title || i18n?.seo?.title || "Sixth Sense Pay"
+const pageDescription = description || i18n?.seo?.description || "Sixth Sense Pay - Payment Solutions"
 ---
 
-<html lang={locale}>
+<html lang={currentLocale}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -71,13 +74,13 @@ const pageDescription = i18n?.seo?.description || "Sixth Sense Pay - Payment Sol
 		<!-- Open Graph / Social Media -->
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={pageDescription} />
-		<meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+		<meta property="og:locale" content={currentLocale === 'es' ? 'es_ES' : 'en_US'} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={`${baseUrl}${currentPath}`} />
 	</head>
 	<body>
-		<Header {i18n} currentLocale={locale} />
+		<Header {i18n} currentLocale={currentLocale} />
 		<slot />
-		<Footer {i18n} currentLocale={locale} />
+		<Footer {i18n} currentLocale={currentLocale} />
 	</body>
 </html>

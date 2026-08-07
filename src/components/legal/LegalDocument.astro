@@ -1,0 +1,120 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { render } from "astro:content"
+
+interface Props {
+	entry: CollectionEntry<"legal">
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+---
+
+<article class="legal-document w-full bg-background">
+	<div class="mx-auto w-full max-w-[800px] px-4 py-12 lg:py-16">
+		<div class="legal-prose">
+			<Content />
+		</div>
+	</div>
+</article>
+
+<style>
+	.legal-prose :global(h1) {
+		font-size: 2.25rem;
+		line-height: 1.2;
+		font-weight: 700;
+		margin: 0 0 0.75rem;
+		color: var(--foreground);
+	}
+
+	.legal-prose :global(h2) {
+		font-size: 1.35rem;
+		line-height: 1.3;
+		font-weight: 700;
+		margin: 2.25rem 0 0.75rem;
+		color: var(--foreground);
+	}
+
+	.legal-prose :global(h3) {
+		font-size: 1.05rem;
+		line-height: 1.4;
+		font-weight: 600;
+		margin: 1.5rem 0 0.5rem;
+		color: var(--foreground);
+	}
+
+	.legal-prose :global(p),
+	.legal-prose :global(li) {
+		font-size: 1rem;
+		line-height: 1.7;
+		font-weight: 300;
+		color: var(--foreground);
+	}
+
+	.legal-prose :global(p) {
+		margin: 0 0 1rem;
+	}
+
+	.legal-prose :global(p:has(+ ul)) {
+		margin-bottom: 0.5rem;
+	}
+
+	.legal-prose :global(ul) {
+		margin: 0 0 1rem;
+		padding-left: 1.25rem;
+		list-style: disc;
+	}
+
+	.legal-prose :global(li) {
+		margin-bottom: 0.35rem;
+	}
+
+	.legal-prose :global(li + li) {
+		margin-top: 0.15rem;
+	}
+
+	.legal-prose :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 0 0 1.25rem;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.legal-prose :global(th),
+	.legal-prose :global(td) {
+		border: 1px solid var(--border);
+		padding: 0.65rem 0.75rem;
+		text-align: left;
+		vertical-align: top;
+		font-weight: 300;
+	}
+
+	.legal-prose :global(th),
+	.legal-prose :global(td:first-child strong),
+	.legal-prose :global(strong) {
+		font-weight: 600;
+	}
+
+	.legal-prose :global(a) {
+		color: var(--primary);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	@media (max-width: 640px) {
+		.legal-prose :global(h1) {
+			font-size: 1.75rem;
+		}
+
+		.legal-prose :global(h2) {
+			font-size: 1.2rem;
+		}
+
+		.legal-prose :global(table) {
+			display: block;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+</style>

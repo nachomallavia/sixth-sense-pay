@@ -1,0 +1,28 @@
+---
+import MainLayout from "@/layouts/mainLayout.astro"
+import LegalDocument from "@/components/legal/LegalDocument.astro"
+import { actions } from "astro:actions"
+import { resolveLegalDoc } from "@/lib/legal"
+
+const locale: string = Astro.params.locale || "en"
+
+const { data, error } = await Astro.callAction(actions.getLocaleContent, {
+	locale,
+})
+const i18n = data?.i18n
+
+if (error) {
+	console.error("Error loading content:", error)
+}
+
+const entry = await resolveLegalDoc("terms-of-service", locale)
+---
+
+<MainLayout
+	locale={locale}
+	i18n={i18n}
+	title={entry.data.title}
+	description={entry.data.description}
+>
+	<LegalDocument entry={entry} />
+</MainLayout>
