@@ -1,0 +1,47 @@
+---
+import MainLayout from "@/layouts/mainLayout.astro"
+import AccountDeletionHero from "@/components/account-deletion/AccountDeletionHero.astro"
+import AccountDeletionForm from "@/components/account-deletion/AccountDeletionForm.astro"
+import { actions } from "astro:actions"
+
+const { locale = "en" } = Astro.params
+
+const { data, error } = await Astro.callAction(actions.getLocaleContent, { locale })
+const i18n = data?.i18n
+
+if (error) {
+	console.error("Error loading content:", error)
+}
+
+const pageCopy = {
+	en: {
+		title: "Account deletion | Sixth Sense Pay",
+		description: "Request deletion of your Sixth Sense Pay account. This page sends a request to support and does not delete the account automatically.",
+	},
+	es: {
+		title: "Baja de cuenta | Sixth Sense Pay",
+		description: "Solicitá la baja de tu cuenta de Sixth Sense Pay. Esta página envía la solicitud a soporte y no elimina la cuenta de forma automática.",
+	},
+	hr: {
+		title: "Brisanje računa | Sixth Sense Pay",
+		description: "Zatražite brisanje svog Sixth Sense Pay računa. Ova stranica šalje zahtjev podršci i ne briše račun automatski.",
+	},
+	bs: {
+		title: "Brisanje računa | Sixth Sense Pay",
+		description: "Zatražite brisanje svog Sixth Sense Pay računa. Ova stranica šalje zahtjev podršci i ne briše račun automatski.",
+	},
+	sr: {
+		title: "Brisanje naloga | Sixth Sense Pay",
+		description: "Zatražite brisanje svog Sixth Sense Pay naloga. Ova stranica šalje zahtev podršci i ne briše nalog automatski.",
+	},
+}
+
+const seo = pageCopy[locale as keyof typeof pageCopy] ?? pageCopy.en
+---
+
+<MainLayout locale={locale} i18n={i18n} title={seo.title} description={seo.description}>
+	<div class="bg-background min-h-screen">
+		<AccountDeletionHero currentLocale={locale} />
+		<AccountDeletionForm currentLocale={locale} />
+	</div>
+</MainLayout>

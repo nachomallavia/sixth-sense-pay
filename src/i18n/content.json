@@ -9,6 +9,10 @@
                 "termsOfService": {
                     "title": "Terms of Service",
                     "url": "/en/terms-of-service"
+                },
+                "accountDeletion": {
+                    "title": "Account deletion",
+                    "url": "/en/account-deletion"
                 }
             },
             "disclaimer": "The Republika Srpska, the Commission and other public sector bodies do not guarantee the value of virtual currencies and are not responsible for any possible damage and losses that users and other holders of virtual currencies or persons who provide services related to virtual currencies, i.e. third parties, suffer in connection with conducting transactions with virtual currencies."
@@ -63,6 +67,10 @@
                 "termsOfService": {
                     "title": "Términos y Condiciones",
                     "url": "/es/terms-of-service"
+                },
+                "accountDeletion": {
+                    "title": "Baja de cuenta",
+                    "url": "/es/account-deletion"
                 }
             },
             "disclaimer": "La República Srpska, la Comisión y otros organismos del sector público no garantizan el valor de las monedas virtuales y no son responsables de los posibles daños y pérdidas que sufran los usuarios y otros titulares de monedas virtuales o las personas que presten servicios relacionados con monedas virtuales, es decir, terceros, en relación con la realización de transacciones con monedas virtuales."
@@ -117,6 +125,10 @@
                 "termsOfService": {
                     "title": "Uvjeti korištenja",
                     "url": "/hr/terms-of-service"
+                },
+                "accountDeletion": {
+                    "title": "Brisanje računa",
+                    "url": "/hr/account-deletion"
                 }
             },
             "disclaimer": "Republika Srpska, Komisija i druga tijela javnog sektora ne jamče za vrijednost virtualnih valuta i ne snose odgovornost za eventualnu štetu i gubitke koje korisnici i drugi imatelji virtualnih valuta ili osobe koje pružaju usluge povezane s virtualnim valutama, odnosno treće strane, pretrpe u vezi s obavljanjem transakcija s virtualnim valutama."
@@ -171,6 +183,10 @@
                 "termsOfService": {
                     "title": "Uvjeti korištenja",
                     "url": "/bs/terms-of-service"
+                },
+                "accountDeletion": {
+                    "title": "Brisanje računa",
+                    "url": "/bs/account-deletion"
                 }
             },
             "disclaimer": "Republika Srpska, Komisija i drugi organ javnog sektora ne garantuju za vrijednost virtuelnih valuta i ne snose odgovornost za bilo koju eventualnu štetu i gubitke koje korisnici i drugi imaoci virtuelnih valuta ili lica koja pružaju usluge povezane sa virtuelnim valutama, odnosno treća lica, pretrpe."
@@ -225,6 +241,10 @@
                 "termsOfService": {
                     "title": "Uslovi korišćenja",
                     "url": "/sr/terms-of-service"
+                },
+                "accountDeletion": {
+                    "title": "Brisanje naloga",
+                    "url": "/sr/account-deletion"
                 }
             },
             "disclaimer": "Republika Srpska, Komisija i drugi organ javnog sektora ne garantuju za vrednost virtuelnih valuta i ne snose odgovornost za bilo kakvu eventualnu štetu i gubitke koje korisnici i drugi imaoci virtuelnih valuta ili lica koja pružaju usluge povezane sa virtuelnim valutama, odnosno treća lica, pretrpe."

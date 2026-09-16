@@ -1,0 +1,70 @@
+---
+const { currentLocale } = Astro.props
+import { CircleDollarSign, ShieldCheck } from "@lucide/astro"
+
+const localesContent = {
+	en: {
+		heading: "Account deletion",
+		intro: "This form sends a deletion request to our support team. It does not delete your account by itself.",
+		conditionsTitle: "Before we can process the request",
+		conditions: "The account must have no available balance. The balance has to be $0 before we process the request.",
+		privacyTitle: "How we handle the data you send",
+		privacy: "We do not store the data submitted through this form on this site. We use it to verify your identity and then delete it.",
+	},
+	es: {
+		heading: "Baja de cuenta",
+		intro: "Este formulario envía una solicitud de baja a nuestro equipo de soporte. No elimina tu cuenta por sí solo.",
+		conditionsTitle: "Antes de procesar la solicitud",
+		conditions: "La cuenta no debe tener saldo disponible. Tiene que quedar en $0 antes de procesar la solicitud.",
+		privacyTitle: "Qué hacemos con los datos que envías",
+		privacy: "Los datos enviados por este formulario no se almacenan en este sitio. Se procesan para verificar tu identidad y luego se eliminan.",
+	},
+	hr: {
+		heading: "Brisanje računa",
+		intro: "Ovaj obrazac šalje zahtjev za brisanje našem timu podrške. Ne briše vaš račun sam od sebe.",
+		conditionsTitle: "Prije obrade zahtjeva",
+		conditions: "Račun ne smije imati raspoloživi saldo. Saldo mora biti 0 $ prije nego što obradimo zahtjev.",
+		privacyTitle: "Kako postupamo s podacima koje pošaljete",
+		privacy: "Podatke poslane ovim obrascem ne pohranjujemo na ovoj stranici. Koristimo ih za provjeru identiteta i zatim ih brišemo.",
+	},
+	bs: {
+		heading: "Brisanje računa",
+		intro: "Ovaj obrazac šalje zahtjev za brisanje našem timu podrške. Ne briše vaš račun sam od sebe.",
+		conditionsTitle: "Prije obrade zahtjeva",
+		conditions: "Račun ne smije imati raspoloživi saldo. Saldo mora biti 0 $ prije nego što obradimo zahtjev.",
+		privacyTitle: "Kako postupamo s podacima koje pošaljete",
+		privacy: "Podatke poslane ovim obrascem ne pohranjujemo na ovoj stranici. Koristimo ih za provjeru identiteta i zatim ih brišemo.",
+	},
+	sr: {
+		heading: "Brisanje naloga",
+		intro: "Ovaj obrazac šalje zahtev za brisanje našem timu podrške. Ne briše vaš nalog sam od sebe.",
+		conditionsTitle: "Pre obrade zahteva",
+		conditions: "Nalog ne sme imati raspoloživ saldo. Saldo mora biti 0 $ pre nego što obradimo zahtev.",
+		privacyTitle: "Kako postupamo s podacima koje pošaljete",
+		privacy: "Podatke poslate ovim obrascem ne čuvamo na ovom sajtu. Koristimo ih za proveru identiteta i zatim ih brišemo.",
+	},
+}
+
+const content = localesContent[currentLocale as keyof typeof localesContent] ?? localesContent.en
+---
+
+<section class="container mx-auto px-4 pt-16 max-w-[800px]">
+	<h1 class="text-4xl lg:text-5xl font-bold mb-6 text-center text-foreground">{content.heading}</h1>
+	<p class="text-lg text-center text-foreground/80 max-w-[520px] mx-auto">{content.intro}</p>
+	<div class="mt-10 text-foreground max-w-[520px] mx-auto bg-gray-100 p-4 rounded-lg">
+		<div class="flex gap-4 px-12 pt-2 pb-4 border-b border-gray-400">
+			<CircleDollarSign class="w-6 h-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+			<div>
+				<h2 class="text-lg font-bold mb-2">{content.conditionsTitle}</h2>
+				<p class="text-sm leading-relaxed font-light">{content.conditions}</p>
+			</div>
+		</div>
+		<div class="flex gap-4 px-12 pt-4 pb-4">
+			<ShieldCheck class="w-6 h-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+			<div>
+				<h2 class="text-lg font-bold mb-2">{content.privacyTitle}</h2>
+				<p class="text-sm leading-relaxed font-light">{content.privacy}</p>
+			</div>
+		</div>
+	</div>
+</section>
