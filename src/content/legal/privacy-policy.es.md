@@ -24,6 +24,7 @@ La App es una billetera de autocustodia. Nunca recopilamos, poseemos ni accedemo
 
 - datos de contacto y soporte: su nombre, dirección de correo electrónico y el contenido de su mensaje cuando nos contacta (por ejemplo, a soporte@sixthsensepay.com); y
 - cualquier otra información que usted decida proporcionar.
+- datos de verificación de identidad (solo para solicitudes de eliminación por correo electrónico): si solicita la eliminación de su cuenta por correo electrónico porque ya no tiene acceso a la App, recopilamos su nombre completo, el correo electrónico registrado en su cuenta y una foto de un documento de identidad emitido por una autoridad pública, únicamente para verificar su identidad. Este documento es revisado por nuestro equipo de cumplimiento, nunca se comparte ni se almacena en nuestra infraestructura de billetera, y se elimina una vez completada la verificación.
 
 ### Datos recopilados automáticamente cuando utiliza la App
 
@@ -80,7 +81,7 @@ Las transacciones que usted realiza quedan registradas en cadenas de bloques pú
 
 ## 9. Conservación de los datos
 
-Conservamos los datos personales únicamente durante el tiempo necesario para los fines descritos en esta Política. Cuando actuamos como sujeto obligado conforme a la normativa de PLA/FT aplicable, determinados registros —incluidos los de cumplimiento y monitoreo de transacciones— se conservan durante el plazo legalmente exigido, que es de un mínimo de cinco (5) años. Las comunicaciones de soporte y los registros técnicos se conservan por períodos más breves, acordes con su finalidad.
+Conservamos los datos personales únicamente durante el tiempo necesario para los fines descritos en esta Política. Cuando usted elimina su cuenta, el registro de su cuenta, las credenciales de la billetera y los datos de sesión se eliminan de forma permanente de nuestros sistemas de operación. Sin embargo, como sujeto obligado conforme a la normativa de PLA/FT aplicable, conservamos un registro de cumplimiento —que contiene su nombre, correo electrónico, número de teléfono, fecha de nacimiento, historial de transacciones y transferencias, e identificadores de billetera— durante un mínimo de cinco (5) años a partir de la fecha de eliminación. Este registro es accesible únicamente para nuestro equipo de cumplimiento, con fines regulatorios, y no es accesible desde la App. Las comunicaciones de soporte y los registros técnicos se conservan por períodos más breves, acordes con su finalidad.
 
 ## 10. Seguridad
 
@@ -93,9 +94,6 @@ Según la ley que lo protege, usted puede tener derecho a acceder a sus datos pe
 | País | Autoridad y norma principal |
 | --- | --- |
 | Argentina | Agencia de Acceso a la Información Pública (AAIP) — Ley 25.326 de Protección de los Datos Personales (habeas data / derechos ARCO). |
-| Paraguay | Ley 7.593/2025 de Protección de Datos Personales (marco general; autoridad de aplicación y obligaciones plenas con entrada en vigencia gradual hasta noviembre de 2027) y Ley 6534/2020 de datos crediticios. |
-| Uruguay | Unidad Reguladora y de Control de Datos Personales (URCDP) — Ley 18.331. |
-| Brasil | Autoridade Nacional de Proteção de Dados (ANPD) — Lei Geral de Proteção de Dados (LGPD, Ley 13.709/2018). |
 | Bosnia y Herzegovina | Agencia de Protección de Datos Personales de Bosnia y Herzegovina. |
 
 ## 12. Menores de edad
