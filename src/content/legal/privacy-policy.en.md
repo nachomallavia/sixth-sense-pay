@@ -16,14 +16,17 @@ We are committed to protecting your privacy and to processing personal data in a
 
 ## 2. Privacy by design: a self-custodial wallet
 
-The App is a self-custodial wallet. We never collect, hold or have access to your Private Keys or Recovery Phrase — these are generated and stored only on your device and remain under your sole control. We do not require identity verification ("KYC") for you to store, send or receive virtual assets using the App. As a result, we collect only a limited amount of personal data, as described below.
+The App is a self-custodial wallet. Your wallet is controlled exclusively by you through a passkey stored on your device (unlocked with your biometrics or PIN) and a recovery password that only you know. The App does not use a seed or recovery phrase. We operate the wallet through a specialized wallet-infrastructure provider, but neither we nor that provider can access, move or recover your funds without your authorization.
+
+We do not require identity verification ("KYC") for you to store, send or receive virtual assets using the App. However, new accounts go through an internal activation review before they can be used. This review is not an identity verification: its purpose is to prevent spam, fraudulent sign-ups and abuse of accounts created through social login. Overall, we collect only a limited amount of personal data, as described below.
 
 ## 3. Personal data we collect
 
 ### Data you provide to us
 
-- contact and support data: your name, email address and the content of your message when you contact us (for example, at soporte@sixthsensepay.com); and
-- any other information you choose to provide.
+- account data: when you register, we collect your full name, email address, phone number and date of birth. We use your date of birth to confirm that you are at least 18 years old. You sign in using your Google or Apple account; we receive your name and email address from that provider but never your password.
+- contact and support data: your name, email address and the content of your message when you contact us (for example, at soporte@sixthsensepay.com).
+- other information: any other information you choose to provide.
 - identity-verification data (email-based deletion requests only): if you request account deletion by email because you no longer have access to the App, we collect your full name, the email registered on your account, and a photo of a government-issued ID document, solely to verify your identity. This document is reviewed by our compliance team, is never shared with or stored in our wallet infrastructure, and is deleted once verification is complete.
 
 ### Data collected automatically when you use the App
@@ -39,7 +42,7 @@ Public wallet addresses, transaction hashes, amounts and timestamps that you gen
 
 ### What we do not collect
 
-We do not collect your Recovery Phrase, your Private Keys, or the contents of your wallet beyond what is publicly recorded on the blockchain.
+We do not collect or have access to your device passkey, your recovery password, or the contents of your wallet beyond what is publicly recorded on the blockchain.
 
 ### Third-Party Services (on-ramp, off-ramp, swaps)
 
@@ -50,6 +53,7 @@ If you choose to use Third-Party Services such as fiat on-ramp/off-ramp or swaps
 We use personal data to:
 
 - provide, maintain and support the App;
+- review and activate new accounts to prevent spam, fraudulent sign-ups and abuse;
 - secure the App and prevent, detect and investigate fraud, abuse and security incidents;
 - comply with legal obligations, including anti-money-laundering and counter-terrorist-financing (AML/CFT), sanctions screening and transaction monitoring (KYT) applied to public wallet addresses that interact with our infrastructure;
 - respond to your support requests;
@@ -62,13 +66,13 @@ Depending on the law that protects you, we rely on the following legal bases: pe
 
 To meet legal obligations and prevent financial crime, wallet addresses and transactions that interact with our infrastructure and with Third-Party Services may be screened and risk-scored using specialized blockchain-analytics tools (Know Your Transaction, or "KYT"). This processing uses on-chain data and does not involve any access to your keys or funds. Where a sanctions match or high-risk indicator arises, we may restrict access to the App or to Third-Party Services and, where legally required, report to competent authorities.
 
-This screening may involve automated analysis. It does not produce a legal effect that deprives you of custody of your assets, which always remain under your control. Where an automated decision significantly affects you, you may request human review and contest the decision as provided by applicable law.
+This screening may involve automated analysis. It does not produce a legal effect that deprives you of custody of your assets, which always remain under your control. Where an automated decision significantly affects you, you may request human review and contest the decision as provided by applicable law. This right also applies to a decision not to activate your account following the activation review described in Section 2, whether or not that decision was made in whole or in part by automated means.
 
 ## 6. Sharing and disclosure
 
 We share personal data with:
 
-- service providers and processors acting on our behalf under contract (for example, cloud/hosting, analytics, crash reporting, blockchain-analytics/KYT and customer-support tools);
+- service providers and processors acting on our behalf under contract (for example, cloud/hosting, wallet-infrastructure, analytics, crash reporting, blockchain-analytics/KYT and customer-support tools);
 - Third-Party Service providers you choose to use, which act as independent controllers;
 - competent authorities, regulators and law-enforcement bodies where required by law, including the Financial Intelligence Unit and APIF of Bosnia and Herzegovina; and
 - professional advisers, or a successor entity in connection with a corporate transaction such as a merger or acquisition.
@@ -89,11 +93,11 @@ We keep personal data only for as long as necessary for the purposes described i
 
 ## 10. Security
 
-We apply appropriate technical and organizational measures to protect personal data, including encryption in transit, access controls and monitoring. No system is completely secure. You remain responsible for securing your device, your access credentials and your Recovery Phrase, which we never hold and cannot recover.
+We apply appropriate technical and organizational measures to protect personal data, including encryption in transit, access controls and monitoring. No system is completely secure. You remain responsible for securing your device, your access credentials and your recovery password, which we never hold and cannot recover.
 
 ## 11. Your rights and how to exercise them
 
-Depending on the law that protects you, you may have the right to access your personal data; to rectify inaccurate data; to request erasure or deletion; to object to or restrict certain processing; to data portability; to withdraw consent; and not to be subject to certain automated decisions. To exercise any right, contact soporte@sixthsensepay.com. We may need to verify your identity before responding. You may also lodge a complaint with the data-protection authority that applies to you:
+Depending on the law that protects you, you may have the right to access your personal data; to rectify inaccurate data; to request erasure or deletion; to object to or restrict certain processing; to data portability; to withdraw consent; and not to be subject to certain automated decisions. To exercise any right, contact soporte@sixthsensepay.com. We may need to verify your identity before responding. To request deletion of your account, see our [Account deletion](/en/account-deletion) page. You may also lodge a complaint with the data-protection authority that applies to you:
 
 | Country | Authority and principal law |
 | --- | --- |

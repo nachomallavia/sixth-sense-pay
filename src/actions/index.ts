@@ -5,29 +5,8 @@ import { Resend } from 'resend';
 import i18nContent from "@/i18n/content.json"
 import { FormSubmitEmail } from "@/emails/formSubmitEmail";
 import { FormSubmitThankYouEmail } from "@/emails/formSubmitThankYouEmail";
-import { AccountDeletionEmail } from "@/emails/accountDeletionEmail";
 import { render } from "@react-email/components";
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-const MAX_ID_DOCUMENT_BYTES = 4 * 1024 * 1024;
-const ALLOWED_ID_DOCUMENT_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "application/pdf"];
-const ALLOWED_ID_DOCUMENT_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".pdf"];
-
-function isAllowedIdDocument(file: File) {
-  if (ALLOWED_ID_DOCUMENT_TYPES.includes(file.type)) return true;
-  const name = file.name.toLowerCase();
-  return ALLOWED_ID_DOCUMENT_EXTENSIONS.some((ext) => name.endsWith(ext));
-}
-
-function isInlineImageDocument(file: File) {
-  if (["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type)) return true
-  return /\.(jpe?g|png|webp)$/i.test(file.name)
-}
-
-function sanitizeFilename(name: string) {
-  const cleaned = name.replace(/[^\w.\-]+/g, "_").replace(/^\.+/, "");
-  return cleaned || "id-document";
-}
 
 const localesContent = {
   "en":{
@@ -113,85 +92,6 @@ export const server = {
       } catch (error) {
         console.error('error inserting contact form submission', error)
         return { success: false, error: error }
-      }
-    }
-  }),
-  sendAccountDeletionRequest: defineAction({
-    accept: 'form',
-    input: z.object({
-      name: z.string().trim().min(1),
-      email: z.string().email(),
-      locale: z.string(),
-      idDocument: z
-        .instanceof(File)
-        .refine((file) => file.size > 0, { message: 'required' })
-        .refine((file) => file.size <= MAX_ID_DOCUMENT_BYTES, { message: 'too_large' })
-        .refine((file) => isAllowedIdDocument(file), { message: 'invalid_type' }),
-    }),
-    handler: async (input) => {
-      const subjects: Record<string, string> = {
-        en: 'Account deletion request',
-        es: 'Solicitud de baja de cuenta',
-        hr: 'Zahtjev za brisanje računa',
-        bs: 'Zahtjev za brisanje računa',
-        sr: 'Zahtev za brisanje naloga',
-      }
-      const filename = sanitizeFilename(input.idDocument.name)
-      const inlineDocumentCid = isInlineImageDocument(input.idDocument) ? "id-document" : undefined
-      const emailHtml = await render(AccountDeletionEmail({
-        name: input.name,
-        email: input.email,
-        locale: input.locale,
-        filename,
-        inlineDocumentCid,
-      }))
-      const emailText = await render(AccountDeletionEmail({
-        name: input.name,
-        email: input.email,
-        locale: input.locale,
-        filename,
-        inlineDocumentCid,
-      }), { plainText: true })
-
-      try {
-        const attachmentContent = Buffer.from(await input.idDocument.arrayBuffer())
-        const contentType = input.idDocument.type || undefined
-        const attachments = [
-          {
-            filename,
-            content: attachmentContent,
-            contentType,
-          },
-          ...(inlineDocumentCid
-            ? [
-                {
-                  filename,
-                  content: attachmentContent,
-                  contentType,
-                  contentId: inlineDocumentCid,
-                },
-              ]
-            : []),
-        ]
-        const { data, error } = await resend.emails.send({
-          from: 'dev@sixthsensepay.com',
-          to: 'soporte@sixthsensepay.com',
-          replyTo: input.email,
-          subject: subjects[input.locale] || subjects.es,
-          html: emailHtml,
-          text: emailText,
-          attachments,
-        })
-
-        if (error || !data) {
-          console.error('error sending account deletion email', error)
-          return { success: false, error: 'send_failed' }
-        }
-
-        return { success: true }
-      } catch (error) {
-        console.error('error sending account deletion request', error)
-        return { success: false, error: 'send_failed' }
       }
     }
   }),

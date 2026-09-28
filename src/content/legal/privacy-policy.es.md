@@ -16,14 +16,17 @@ Estamos comprometidos con la protección de su privacidad y con el tratamiento d
 
 ## 2. Privacidad desde el diseño: una billetera de autocustodia
 
-La App es una billetera de autocustodia. Nunca recopilamos, poseemos ni accedemos a sus Claves Privadas ni a su Frase de Recuperación: estas se generan y almacenan únicamente en su dispositivo y permanecen bajo su exclusivo control. No exigimos verificación de identidad ("KYC") para que usted almacene, envíe o reciba activos virtuales mediante la App. Como resultado, recopilamos solo una cantidad limitada de datos personales, según se describe a continuación.
+La App es una billetera de autocustodia. Su billetera está controlada exclusivamente por usted mediante una passkey almacenada en su dispositivo (que se desbloquea con su biometría o PIN) y una contraseña de recuperación que solo usted conoce. La App no utiliza una seed ni una frase de recuperación. Operamos la billetera a través de un proveedor especializado de infraestructura de billetera, pero ni nosotros ni ese proveedor podemos acceder a sus fondos, moverlos o recuperarlos sin su autorización.
+
+No exigimos verificación de identidad ("KYC") para que usted almacene, envíe o reciba activos virtuales mediante la App. Sin embargo, las cuentas nuevas pasan por una revisión interna de activación antes de poder utilizarse. Esta revisión no es una verificación de identidad: su finalidad es prevenir el spam, los registros fraudulentos y el abuso de cuentas creadas mediante inicio de sesión social. En conjunto, recopilamos solo una cantidad limitada de datos personales, según se describe a continuación.
 
 ## 3. Datos personales que recopilamos
 
 ### Datos que usted nos proporciona
 
-- datos de contacto y soporte: su nombre, dirección de correo electrónico y el contenido de su mensaje cuando nos contacta (por ejemplo, a soporte@sixthsensepay.com); y
-- cualquier otra información que usted decida proporcionar.
+- datos de cuenta: cuando usted se registra, recopilamos su nombre completo, dirección de correo electrónico, número de teléfono y fecha de nacimiento. Utilizamos su fecha de nacimiento para confirmar que tiene al menos 18 años. Usted inicia sesión con su cuenta de Google o Apple; recibimos su nombre y su dirección de correo electrónico de ese proveedor, pero nunca su contraseña.
+- datos de contacto y soporte: su nombre, dirección de correo electrónico y el contenido de su mensaje cuando nos contacta (por ejemplo, a soporte@sixthsensepay.com).
+- otra información: cualquier otra información que usted decida proporcionar.
 - datos de verificación de identidad (solo para solicitudes de eliminación por correo electrónico): si solicita la eliminación de su cuenta por correo electrónico porque ya no tiene acceso a la App, recopilamos su nombre completo, el correo electrónico registrado en su cuenta y una foto de un documento de identidad emitido por una autoridad pública, únicamente para verificar su identidad. Este documento es revisado por nuestro equipo de cumplimiento, nunca se comparte ni se almacena en nuestra infraestructura de billetera, y se elimina una vez completada la verificación.
 
 ### Datos recopilados automáticamente cuando utiliza la App
@@ -39,7 +42,7 @@ Las direcciones públicas de billetera, los hashes de transacción, los montos y
 
 ### Lo que no recopilamos
 
-No recopilamos su Frase de Recuperación, sus Claves Privadas ni el contenido de su billetera más allá de lo que queda registrado públicamente en la cadena de bloques.
+No recopilamos ni tenemos acceso a la passkey de su dispositivo, a su contraseña de recuperación ni al contenido de su billetera más allá de lo que queda registrado públicamente en la cadena de bloques.
 
 ### Servicios de Terceros (on-ramp, off-ramp, swaps)
 
@@ -49,6 +52,7 @@ Si usted elige utilizar Servicios de Terceros como el ingreso/egreso de fondos f
 
 Utilizamos los datos personales para:
 - proveer, mantener y dar soporte a la App;
+- revisar y activar cuentas nuevas para prevenir el spam, los registros fraudulentos y el abuso;
 - proteger la App y prevenir, detectar e investigar fraudes, abusos e incidentes de seguridad;
 - cumplir con obligaciones legales, incluida la prevención de lavado de activos y financiamiento del terrorismo (PLA/FT), el análisis contra listas de sanciones y el monitoreo de transacciones (KYT) aplicado a las direcciones públicas de billetera que interactúan con nuestra infraestructura;
 - responder a sus solicitudes de soporte;
@@ -60,12 +64,12 @@ Según la ley que lo protege, nos basamos en las siguientes bases de licitud: la
 
 Para cumplir con obligaciones legales y prevenir el delito financiero, las direcciones de billetera y las transacciones que interactúan con nuestra infraestructura y con los Servicios de Terceros pueden ser analizadas y calificadas por riesgo mediante herramientas especializadas de análisis de cadena de bloques (Know Your Transaction o "KYT"). Este tratamiento utiliza datos de la cadena de bloques y no implica ningún acceso a sus claves ni a sus fondos. Cuando surge una coincidencia con listas de sanciones o un indicador de alto riesgo, podemos restringir el acceso a la App o a los Servicios de Terceros y, cuando la ley lo exija, reportar a las autoridades competentes.
 
-Este análisis puede implicar un procesamiento automatizado. No produce un efecto jurídico que lo prive de la custodia de sus activos, que siempre permanecen bajo su control. Cuando una decisión automatizada lo afecte de manera significativa, usted puede solicitar la intervención humana y cuestionar la decisión conforme a la ley aplicable.
+Este análisis puede implicar un procesamiento automatizado. No produce un efecto jurídico que lo prive de la custodia de sus activos, que siempre permanecen bajo su control. Cuando una decisión automatizada lo afecte de manera significativa, usted puede solicitar la intervención humana y cuestionar la decisión conforme a la ley aplicable. Este derecho también se aplica a la decisión de no activar su cuenta tras la revisión de activación descrita en la Sección 2, ya sea que esa decisión se haya tomado en todo o en parte por medios automatizados.
 
 ## 6. Comunicación y divulgación de datos
 
 Compartimos datos personales con:
-- proveedores de servicios y encargados que actúan por cuenta nuestra en virtud de un contrato (por ejemplo, alojamiento en la nube, analíticas, reporte de fallos, análisis de cadena de bloques/KYT y herramientas de atención al cliente);
+- proveedores de servicios y encargados que actúan por cuenta nuestra en virtud de un contrato (por ejemplo, alojamiento en la nube, infraestructura de billetera, analíticas, reporte de fallos, análisis de cadena de bloques/KYT y herramientas de atención al cliente);
 - proveedores de Servicios de Terceros que usted elija utilizar, que actúan como responsables independientes;
 - autoridades competentes, reguladores y organismos de aplicación de la ley cuando la ley lo exija, incluidas la Unidad de Inteligencia Financiera y APIF de Bosnia y Herzegovina; y
 - asesores profesionales, o una entidad sucesora en relación con una operación societaria como una fusión o adquisición.
@@ -85,11 +89,11 @@ Conservamos los datos personales únicamente durante el tiempo necesario para lo
 
 ## 10. Seguridad
 
-Aplicamos medidas técnicas y organizativas adecuadas para proteger los datos personales, incluidas el cifrado en tránsito, los controles de acceso y el monitoreo. Ningún sistema es completamente seguro. Usted es responsable de proteger su dispositivo, sus credenciales de acceso y su Frase de Recuperación, que nunca poseemos y no podemos recuperar.
+Aplicamos medidas técnicas y organizativas adecuadas para proteger los datos personales, incluidas el cifrado en tránsito, los controles de acceso y el monitoreo. Ningún sistema es completamente seguro. Usted es responsable de proteger su dispositivo, sus credenciales de acceso y su contraseña de recuperación, que nunca poseemos y no podemos recuperar.
 
 ## 11. Sus derechos y cómo ejercerlos
 
-Según la ley que lo protege, usted puede tener derecho a acceder a sus datos personales; a rectificar los datos inexactos; a solicitar su supresión o eliminación; a oponerse a determinados tratamientos o a limitarlos; a la portabilidad de los datos; a retirar el consentimiento; y a no ser objeto de determinadas decisiones automatizadas. Para ejercer cualquier derecho, escriba a soporte@sixthsensepay.com. Es posible que debamos verificar su identidad antes de responder. También puede presentar un reclamo ante la autoridad de protección de datos que le corresponda:
+Según la ley que lo protege, usted puede tener derecho a acceder a sus datos personales; a rectificar los datos inexactos; a solicitar su supresión o eliminación; a oponerse a determinados tratamientos o a limitarlos; a la portabilidad de los datos; a retirar el consentimiento; y a no ser objeto de determinadas decisiones automatizadas. Para ejercer cualquier derecho, escriba a soporte@sixthsensepay.com. Es posible que debamos verificar su identidad antes de responder. Para solicitar la eliminación de su cuenta, consulte nuestra página de [Baja de cuenta](/es/account-deletion). También puede presentar un reclamo ante la autoridad de protección de datos que le corresponda:
 
 | País | Autoridad y norma principal |
 | --- | --- |

@@ -1,70 +1,142 @@
 ---
 const { currentLocale } = Astro.props
-import { CircleDollarSign, ShieldCheck } from "@lucide/astro"
 
 const localesContent = {
 	en: {
 		heading: "Account deletion",
-		intro: "This form sends a deletion request to our support team. It does not delete your account by itself.",
-		conditionsTitle: "Before we can process the request",
-		conditions: "The account must have no available balance. The balance has to be $0 before we process the request.",
-		privacyTitle: "How we handle the data you send",
-		privacy: "We do not store the data submitted through this form on this site. We use it to verify your identity and then delete it.",
+		intro: "You can request deletion of your Sixth Sense Pay account in two ways.",
+		option1Title: "Option 1 — From the app (self-service)",
+		steps: [
+			"Go to Settings → Delete account, and confirm with your device's biometric authentication or PIN.",
+			"If any of your balances are above the minimum withdrawable amount for that asset, you'll need to withdraw them first — the app will tell you which ones.",
+			"If a balance is at or below that minimum (too small to be worth the network fee to move), you can choose to forfeit it and continue.",
+			"Once submitted, you have 24 hours to cancel the request from within the app. After that window, deletion begins automatically and can no longer be cancelled.",
+			"We'll email you at each stage of the process: when the request is received, when processing begins, and when it's completed. Deletion is typically completed within up to 3 business days after processing begins, though this is an estimate, not a guaranteed date.",
+		],
+		option2Title: "Option 2 — By email (if you no longer have access to the app)",
+		option2Before: "Contact ",
+		option2After:
+			" with your full name, the email registered on your account, and a photo of a government-issued ID. Our compliance team verifies your identity manually; the ID photo is used only for that purpose, is never shared with or stored in our wallet systems, and is deleted once verification is complete. Once verified, we submit the same deletion request on your behalf, subject to the same balance conditions, timeline and email notifications described above.",
+		deletedTitle: "What gets deleted",
+		deleted:
+			"Your account record, your wallet's signing credentials, and your session data are permanently removed from our operating systems. This is irreversible once processing begins.",
+		keptTitle: "What we keep, and why",
+		keptBefore:
+			"For legal and anti-money-laundering (AML) record-keeping obligations, we retain a compliance record containing your name, email, phone number, date of birth, transaction and transfer history (including destination addresses), and wallet identifiers, for a minimum of five (5) years. This record is no longer accessible from the app or by you — only our compliance team can access it, and only for regulatory purposes. See our ",
+		privacyLink: "Privacy Policy",
+		keptAfter: " for details.",
 	},
 	es: {
 		heading: "Baja de cuenta",
-		intro: "Este formulario envía una solicitud de baja a nuestro equipo de soporte. No elimina tu cuenta por sí solo.",
-		conditionsTitle: "Antes de procesar la solicitud",
-		conditions: "La cuenta no debe tener saldo disponible. Tiene que quedar en $0 antes de procesar la solicitud.",
-		privacyTitle: "Qué hacemos con los datos que envías",
-		privacy: "Los datos enviados por este formulario no se almacenan en este sitio. Se procesan para verificar tu identidad y luego se eliminan.",
-	},
-	hr: {
-		heading: "Brisanje računa",
-		intro: "Ovaj obrazac šalje zahtjev za brisanje našem timu podrške. Ne briše vaš račun sam od sebe.",
-		conditionsTitle: "Prije obrade zahtjeva",
-		conditions: "Račun ne smije imati raspoloživi saldo. Saldo mora biti 0 $ prije nego što obradimo zahtjev.",
-		privacyTitle: "Kako postupamo s podacima koje pošaljete",
-		privacy: "Podatke poslane ovim obrascem ne pohranjujemo na ovoj stranici. Koristimo ih za provjeru identiteta i zatim ih brišemo.",
-	},
-	bs: {
-		heading: "Brisanje računa",
-		intro: "Ovaj obrazac šalje zahtjev za brisanje našem timu podrške. Ne briše vaš račun sam od sebe.",
-		conditionsTitle: "Prije obrade zahtjeva",
-		conditions: "Račun ne smije imati raspoloživi saldo. Saldo mora biti 0 $ prije nego što obradimo zahtjev.",
-		privacyTitle: "Kako postupamo s podacima koje pošaljete",
-		privacy: "Podatke poslane ovim obrascem ne pohranjujemo na ovoj stranici. Koristimo ih za provjeru identiteta i zatim ih brišemo.",
-	},
-	sr: {
-		heading: "Brisanje naloga",
-		intro: "Ovaj obrazac šalje zahtev za brisanje našem timu podrške. Ne briše vaš nalog sam od sebe.",
-		conditionsTitle: "Pre obrade zahteva",
-		conditions: "Nalog ne sme imati raspoloživ saldo. Saldo mora biti 0 $ pre nego što obradimo zahtev.",
-		privacyTitle: "Kako postupamo s podacima koje pošaljete",
-		privacy: "Podatke poslate ovim obrascem ne čuvamo na ovom sajtu. Koristimo ih za proveru identiteta i zatim ih brišemo.",
+		intro: "Podés pedir la baja de tu cuenta de Sixth Sense Pay de dos maneras.",
+		option1Title: "Opción 1 — Desde la app (autoservicio)",
+		steps: [
+			"Andá a Ajustes → Eliminar cuenta y confirmá con la biometría o el PIN de tu dispositivo.",
+			"Si alguno de tus saldos está por encima del monto mínimo que se puede retirar de ese activo, tenés que retirarlo antes: la app te va a indicar cuáles.",
+			"Si un saldo está en ese mínimo o por debajo (demasiado chico como para que valga la comisión de la red), podés renunciar a él y seguir.",
+			"Una vez enviada, tenés 24 horas para cancelar la solicitud desde la app. Después de ese plazo, la baja empieza sola y ya no se puede cancelar.",
+			"Te vamos a escribir por email en cada etapa: cuando recibimos la solicitud, cuando empieza el proceso y cuando termina. La baja suele completarse en hasta 3 días hábiles desde que empieza el proceso; es una estimación, no una fecha garantizada.",
+		],
+		option2Title: "Opción 2 — Por email (si ya no tenés acceso a la app)",
+		option2Before: "Escribí a ",
+		option2After:
+			" con tu nombre completo, el email registrado en tu cuenta y una foto de un documento de identidad emitido por una autoridad pública. Nuestro equipo de cumplimiento verifica tu identidad a mano; la foto se usa solo para eso, nunca se comparte ni se guarda en nuestros sistemas de billetera, y se elimina cuando termina la verificación. Una vez verificada, enviamos la misma solicitud de baja en tu nombre, con las mismas condiciones de saldo, plazos y avisos por email de arriba.",
+		deletedTitle: "Qué se elimina",
+		deleted:
+			"El registro de tu cuenta, las credenciales de firma de tu billetera y tus datos de sesión se eliminan de forma permanente de nuestros sistemas de operación. Esto es irreversible cuando empieza el proceso.",
+		keptTitle: "Qué conservamos, y por qué",
+		keptBefore:
+			"Por obligaciones legales y de conservación de registros de prevención de lavado de activos (PLA), conservamos un registro de cumplimiento con tu nombre, email, teléfono, fecha de nacimiento, historial de transacciones y transferencias (incluidas las direcciones de destino) e identificadores de billetera, por un mínimo de cinco (5) años. Ese registro ya no es accesible desde la app ni para vos: solo puede acceder nuestro equipo de cumplimiento, y solo con fines regulatorios. Mirá nuestra ",
+		privacyLink: "Política de Privacidad",
+		keptAfter: " para más detalles.",
 	},
 }
 
 const content = localesContent[currentLocale as keyof typeof localesContent] ?? localesContent.en
+const privacyHref = `/${currentLocale}/privacy-policy`
 ---
 
-<section class="container mx-auto px-4 pt-16 max-w-[800px]">
-	<h1 class="text-4xl lg:text-5xl font-bold mb-6 text-center text-foreground">{content.heading}</h1>
-	<p class="text-lg text-center text-foreground/80 max-w-[520px] mx-auto">{content.intro}</p>
-	<div class="mt-10 text-foreground max-w-[520px] mx-auto bg-gray-100 p-4 rounded-lg">
-		<div class="flex gap-4 px-12 pt-2 pb-4 border-b border-gray-400">
-			<CircleDollarSign class="w-6 h-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-			<div>
-				<h2 class="text-lg font-bold mb-2">{content.conditionsTitle}</h2>
-				<p class="text-sm leading-relaxed font-light">{content.conditions}</p>
-			</div>
-		</div>
-		<div class="flex gap-4 px-12 pt-4 pb-4">
-			<ShieldCheck class="w-6 h-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-			<div>
-				<h2 class="text-lg font-bold mb-2">{content.privacyTitle}</h2>
-				<p class="text-sm leading-relaxed font-light">{content.privacy}</p>
-			</div>
-		</div>
+<article class="w-full bg-background">
+	<div class="mx-auto w-full max-w-[800px] px-4 py-12 lg:py-16">
+		<h1>{content.heading}</h1>
+		<p>{content.intro}</p>
+
+		<h2>{content.option1Title}</h2>
+		<ol>
+			{content.steps.map((step) => <li>{step}</li>)}
+		</ol>
+
+		<h2>{content.option2Title}</h2>
+		<p>
+			{content.option2Before}<a href="mailto:soporte@sixthsensepay.com">soporte@sixthsensepay.com</a>{content.option2After}
+		</p>
+
+		<h2>{content.deletedTitle}</h2>
+		<p>{content.deleted}</p>
+
+		<h2>{content.keptTitle}</h2>
+		<p>
+			{content.keptBefore}<a href={privacyHref}>{content.privacyLink}</a>{content.keptAfter}
+		</p>
 	</div>
-</section>
+</article>
+
+<style>
+	h1 {
+		font-size: 2.25rem;
+		line-height: 1.2;
+		font-weight: 700;
+		margin: 0 0 0.75rem;
+		color: var(--foreground);
+	}
+
+	h2 {
+		font-size: 1.35rem;
+		line-height: 1.3;
+		font-weight: 700;
+		margin: 2.25rem 0 0.75rem;
+		color: var(--foreground);
+	}
+
+	p,
+	li {
+		font-size: 1rem;
+		line-height: 1.7;
+		font-weight: 300;
+		color: var(--foreground);
+	}
+
+	p {
+		margin: 0 0 1rem;
+	}
+
+	ol {
+		margin: 0 0 1rem;
+		padding-left: 1.25rem;
+		list-style: decimal;
+	}
+
+	li {
+		margin-bottom: 0.35rem;
+	}
+
+	li + li {
+		margin-top: 0.15rem;
+	}
+
+	a {
+		color: var(--primary);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	@media (max-width: 640px) {
+		h1 {
+			font-size: 1.75rem;
+		}
+
+		h2 {
+			font-size: 1.2rem;
+		}
+	}
+</style>
